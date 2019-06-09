@@ -5,8 +5,8 @@ import Types from "~/pages/Types";
 
 const Routes = createAppContainer(
   createSwitchNavigator({
-    Login,
-    Types
+    Types,
+    Login
   })
 );
 
