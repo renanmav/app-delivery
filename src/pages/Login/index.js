@@ -3,6 +3,10 @@ import React, { Component } from "react";
 import background from "~/assets/background.png";
 import logo from "~/assets/logo.png";
 
+import { connect } from "react-redux";
+import { bindActionCreators } from "redux";
+import { Creators as AuthActions } from "~/store/ducks/auth";
+
 import {
   Container,
   Input,
@@ -13,11 +17,13 @@ import {
   Logo
 } from "./styles";
 
-export default class Login extends Component {
+class Login extends Component {
   state = { email: "", password: "" };
 
   handleSubmit = () => {
     const { email, password } = this.state;
+    const { loginRequest } = this.props;
+    loginRequest(email, password);
   };
 
   render() {
@@ -53,3 +59,15 @@ export default class Login extends Component {
     );
   }
 }
+
+const mapStateToProps = state => ({
+  auth: state.auth
+});
+
+const mapDispatchToProps = dispatch =>
+  bindActionCreators(AuthActions, dispatch);
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Login);
