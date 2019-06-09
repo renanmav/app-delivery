@@ -3,10 +3,11 @@
   "env": {
     "es6": true
   },
-  "extends": "airbnb",
+  "extends": ["airbnb", "plugin:react-native/all"],
   "globals": {
     "Atomics": "readonly",
-    "SharedArrayBuffer": "readonly"
+    "SharedArrayBuffer": "readonly",
+    "__DEV__": true
   },
   "parserOptions": {
     "ecmaFeatures": {
@@ -15,12 +16,17 @@
     "ecmaVersion": 2018,
     "sourceType": "module"
   },
-  "plugins": ["react"],
+  "plugins": ["react-native", "jsx-a11y", "import"],
   "rules": {
     "react/jsx-filename-extension": [
       "error",
       { "extensions": [".js", ".jsx"] }
     ],
     "import/prefer-default-export": "off"
+  },
+  "settings": {
+    "import/resolver": {
+      "babel-plugin-root-import": {}
+    }
   }
 }
