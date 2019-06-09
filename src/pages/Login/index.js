@@ -42,6 +42,11 @@ class Login extends Component {
             autoCapitalize="none"
             autoCorrect={false}
             placeholder="Seu e-mail"
+            returnKeyType={"next"}
+            onSubmitEditing={() => {
+              this.secondTextInput.focus();
+            }}
+            blurOnSubmit={false}
           />
           <Input
             value={password}
@@ -50,6 +55,10 @@ class Login extends Component {
             autoCorrect={false}
             placeholder="Sua senha secreta"
             secureTextEntry
+            ref={input => {
+              this.secondTextInput = input;
+            }}
+            onSubmitEditing={this.handleSubmit}
           />
           <Button onPress={this.handleSubmit}>
             {loading ? <ActivityIndicator /> : <TextButton>Entrar</TextButton>}

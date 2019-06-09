@@ -12,7 +12,15 @@ function* login(action) {
 
     const { token } = data;
 
-    yield put(Creators.loginSuccess(token));
+    const { data: user } = yield call(api.get, "/sessions", {
+      headers: {
+        Authorization: "bearer " + token
+      }
+    });
+
+    console.tron.log(user);
+
+    yield put(Creators.loginSuccess(token, user));
 
     navigate("Types");
   } catch (err) {
