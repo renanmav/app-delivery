@@ -1,17 +1,13 @@
-import './src/config/reactotron';
-import './src/config/reactdevtools';
+import '~/config/reactotron';
+import '~/config/reactdevtools';
 
-import React, { Component } from 'react';
+import React from 'react';
 import { Text, View } from 'react-native';
 
-export default class App extends Component {
-  state = {};
+const App = () => (
+  <View>
+    <Text>Hello World</Text>
+  </View>
+);
 
-  render() {
-    return (
-      <View>
-        <Text>Hello World!</Text>
-      </View>
-    );
-  }
-}
+export default App;
