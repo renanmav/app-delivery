@@ -14,7 +14,8 @@ import {
   TextButton,
   CreateAccount,
   Background,
-  Logo
+  Logo,
+  ActivityIndicator
 } from "./styles";
 
 class Login extends Component {
@@ -28,6 +29,7 @@ class Login extends Component {
 
   render() {
     const { email, password } = this.state;
+    const { loading } = this.props.auth;
 
     return (
       <Background source={background}>
@@ -49,7 +51,7 @@ class Login extends Component {
             secureTextEntry
           />
           <Button onPress={this.handleSubmit}>
-            <TextButton>Entrar</TextButton>
+            {loading ? <ActivityIndicator /> : <TextButton>Entrar</TextButton>}
           </Button>
           <CreateAccount>
             <TextButton>Criar conta gratuita</TextButton>

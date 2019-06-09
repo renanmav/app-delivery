@@ -58,3 +58,7 @@ export const Logo = styled.Image`
 
   margin-bottom: ${metrics.baseMargin * 2}px;
 `;
+
+export const ActivityIndicator = styled.ActivityIndicator.attrs({
+  color: colors.white
+})``;
