@@ -1,14 +1,55 @@
-import React from 'react';
+import React, { Component } from "react";
 
-import { View, Text } from 'react-native';
+import background from "~/assets/background.png";
+import logo from "~/assets/logo.png";
 
-// import { Container } from './styles';
-import styles from './styles';
+import {
+  Container,
+  Input,
+  Button,
+  TextButton,
+  CreateAccount,
+  Background,
+  Logo
+} from "./styles";
 
-const Login = () => (
-  <View style={styles.container}>
-    <Text>Login page</Text>
-  </View>
-);
+export default class Login extends Component {
+  state = { email: "", password: "" };
 
-export default Login;
+  handleSubmit = () => {
+    const { email, password } = this.state;
+  };
+
+  render() {
+    const { email, password } = this.state;
+
+    return (
+      <Background source={background}>
+        <Container>
+          <Logo source={logo} />
+          <Input
+            value={email}
+            onChangeText={email => this.setState({ email })}
+            autoCapitalize="none"
+            autoCorrect={false}
+            placeholder="Seu e-mail"
+          />
+          <Input
+            value={password}
+            onChangeText={password => this.setState({ password })}
+            autoCapitalize="none"
+            autoCorrect={false}
+            placeholder="Sua senha secreta"
+            secureTextEntry
+          />
+          <Button onPress={this.handleSubmit}>
+            <TextButton>Entrar</TextButton>
+          </Button>
+          <CreateAccount>
+            <TextButton>Criar conta gratuita</TextButton>
+          </CreateAccount>
+        </Container>
+      </Background>
+    );
+  }
+}
