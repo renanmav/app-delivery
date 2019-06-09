@@ -1,6 +1,8 @@
 /* eslint-disable no-console */
 import { createStore, compose, applyMiddleware } from 'redux';
 
+import rootReducers from './ducks';
+
 const composer = __DEV__
   ? compose(
     applyMiddleware(...[]),
@@ -8,6 +10,6 @@ const composer = __DEV__
   )
   : applyMiddleware(...[]);
 
-const store = createStore(() => [], composer);
+const store = createStore(rootReducers, composer);
 
 export default store;
