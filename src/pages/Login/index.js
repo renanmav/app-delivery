@@ -15,7 +15,8 @@ import {
   CreateAccount,
   Background,
   Logo,
-  ActivityIndicator
+  ActivityIndicator,
+  TextError
 } from "./styles";
 
 class Login extends Component {
@@ -29,7 +30,7 @@ class Login extends Component {
 
   render() {
     const { email, password } = this.state;
-    const { loading } = this.props.auth;
+    const { loading, error } = this.props.auth;
 
     return (
       <Background source={background}>
@@ -53,6 +54,12 @@ class Login extends Component {
           <Button onPress={this.handleSubmit}>
             {loading ? <ActivityIndicator /> : <TextButton>Entrar</TextButton>}
           </Button>
+          {error ? (
+            <TextError>
+              Algo deu errado! Verifique suas credenciais ou tente novamente
+              mais tarde.
+            </TextError>
+          ) : null}
           <CreateAccount>
             <TextButton>Criar conta gratuita</TextButton>
           </CreateAccount>

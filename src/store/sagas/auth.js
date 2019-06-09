@@ -16,7 +16,7 @@ function* login(action) {
 
     navigate("Types");
   } catch (err) {
-    yield put(Creators.loginFailure(err.message));
+    yield put(Creators.loginFailure());
   }
 }
 

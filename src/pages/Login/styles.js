@@ -62,3 +62,9 @@ export const Logo = styled.Image`
 export const ActivityIndicator = styled.ActivityIndicator.attrs({
   color: colors.white
 })``;
+
+export const TextError = styled.Text`
+  color: ${colors.danger};
+  font-size: 15px;
+  font-weight: bold;
+`;
