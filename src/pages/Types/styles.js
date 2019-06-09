@@ -50,25 +50,9 @@ export const ListType = styled.View`
   margin: ${metrics.baseMargin * 2}px;
 `;
 
-export const Type = styled.TouchableOpacity`
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-
-  background: ${colors.white};
-  border-radius: ${metrics.baseRadius}px;
-  padding: ${metrics.basePadding}px;
-
-  height: 110px;
-
-  margin-bottom: ${metrics.baseMargin}px;
-
-  box-shadow: 5px 5px 5px ${colors.black};
-  elevation: 15;
-`;
-
 export const ImageType = styled.Image`
   height: 79px;
+  width: 79px;
   margin-right: ${metrics.baseMargin}px;
 `;
 
@@ -99,4 +83,21 @@ export const TextTypeTime = styled.Text`
   font-size: 10px;
   letter-spacing: 0.46px;
   margin-left: 5px;
+`;
+
+export const Type = styled.TouchableOpacity`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+
+  background: ${colors.white};
+  border-radius: ${metrics.baseRadius}px;
+  padding: ${metrics.basePadding}px;
+
+  height: 110px;
+
+  margin-bottom: ${metrics.baseMargin}px;
+
+  box-shadow: 5px 5px 5px ${colors.darkTransparent};
+  elevation: 15;
 `;

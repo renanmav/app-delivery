@@ -1,10 +1,22 @@
-import React from "react";
+import React, { useEffect } from "react";
 
-import { Image, TouchableOpacity, StatusBar, Text, View } from "react-native";
+import { connect } from "react-redux";
+import { bindActionCreators } from "redux";
+import { Creators as TypeActions } from "~/store/ducks/type";
+
+import {
+  Image,
+  TouchableOpacity,
+  StatusBar,
+  View,
+  ActivityIndicator,
+  Text
+} from "react-native";
 
 import cartImage from "~/assets/cart.png";
 import headerBackground from "~/assets/header-background.png";
-import foto from "~/assets/foto.png";
+
+import api from "~/config/api";
 
 import Icon from "react-native-vector-icons/MaterialIcons";
 
@@ -25,41 +37,70 @@ import {
 
 import { colors } from "~/styles";
 
-const TypesList = () => (
+const TypesList = ({ types }) => (
   <ListType>
-    <Type>
-      <ImageType source={foto} />
-      <View>
-        <TextTypeName>Massas</TextTypeName>
-        <TextTypeDescription>
-          10 tipos de massas com diferentes molhos para te satisfazer.
-        </TextTypeDescription>
-        <WrapperTypeTime>
-          <Icon name="alarm" color={colors.light} size={14} />
-          <TextTypeTime>30 mins</TextTypeTime>
-        </WrapperTypeTime>
-      </View>
-    </Type>
+    {types.map(type => (
+      <Type key={type.id}>
+        <ImageType
+          source={{
+            uri: `${api.baseURL}/files?id=${type.file_id}`
+          }}
+        />
+        <View>
+          <TextTypeName>{type.name}</TextTypeName>
+          <TextTypeDescription>{type.description}</TextTypeDescription>
+          <WrapperTypeTime>
+            <Icon name="alarm" color={colors.light} size={14} />
+            <TextTypeTime>{type.time} mins</TextTypeTime>
+          </WrapperTypeTime>
+        </View>
+      </Type>
+    ))}
   </ListType>
 );
 
-const Types = () => (
-  <Background source={headerBackground} style={{ height: "30%" }}>
-    <Container>
-      <StatusBar backgroundColor={colors.background} barStyle="light-content" />
-      <MenuTop>
-        <TouchableOpacity>
-          <Icon name="history" color={colors.white} size={24} />
-        </TouchableOpacity>
-        <TextMenu>Pizzaria Don Juan</TextMenu>
-        <ButtonCart>
-          <Image source={cartImage} />
-        </ButtonCart>
-      </MenuTop>
+function Types(props) {
+  useEffect(() => {
+    const { indexRequest } = props;
+    indexRequest();
+  }, []);
 
-      <TypesList />
-    </Container>
-  </Background>
-);
+  const { loading, types } = props.type;
 
-export default Types;
+  return (
+    <Background source={headerBackground} style={{ height: "30%" }}>
+      <Container>
+        <StatusBar
+          backgroundColor={colors.background}
+          barStyle="light-content"
+        />
+        <MenuTop>
+          <TouchableOpacity>
+            <Icon name="history" color={colors.white} size={24} />
+          </TouchableOpacity>
+          <TextMenu>Pizzaria Don Juan</TextMenu>
+          <ButtonCart>
+            <Image source={cartImage} />
+          </ButtonCart>
+        </MenuTop>
+        {loading ? (
+          <ActivityIndicator color={colors.white} />
+        ) : (
+          <TypesList types={types} />
+        )}
+      </Container>
+    </Background>
+  );
+}
+
+const mapStateToProps = state => ({
+  type: state.type
+});
+
+const mapDispatchToProps = dispatch =>
+  bindActionCreators(TypeActions, dispatch);
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Types);

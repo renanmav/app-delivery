@@ -18,8 +18,6 @@ function* login(action) {
       }
     });
 
-    console.tron.log(user);
-
     yield put(Creators.loginSuccess(token, user));
 
     navigate("Types");
