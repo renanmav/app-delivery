@@ -9,7 +9,7 @@ export const Background = styled.ImageBackground`
   flex: 1;
 `;
 
-export const Container = styled.ScrollView`
+export const Container = styled.SafeAreaView`
   display: flex;
   flex: 1;
   flex-direction: column;

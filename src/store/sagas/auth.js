@@ -3,7 +3,7 @@ import { call, put } from "redux-saga/effects";
 import { Creators } from "../ducks/auth";
 
 import api from "~/services/api";
-import { navigate } from "~/services/navigation";
+import { navigateAndResetHistory } from "~/services/navigation";
 
 function* login(action) {
   try {
@@ -20,7 +20,7 @@ function* login(action) {
 
     yield put(Creators.loginSuccess(token, user));
 
-    navigate("Types");
+    navigateAndResetHistory("Types");
   } catch (err) {
     yield put(Creators.loginFailure());
   }

@@ -1,4 +1,4 @@
-import { NavigationActions } from "react-navigation";
+import { NavigationActions, StackActions } from "react-navigation";
 
 let navigator;
 
@@ -11,6 +11,15 @@ export function navigate(routeName, params) {
     NavigationActions.navigate({
       routeName,
       params
+    })
+  );
+}
+
+export function navigateAndResetHistory(routeName) {
+  navigator.dispatch(
+    StackActions.reset({
+      index: 0,
+      actions: [NavigationActions.navigate({ routeName })]
     })
   );
 }
