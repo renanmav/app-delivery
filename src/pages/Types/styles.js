@@ -100,5 +100,4 @@ export const Type = styled.TouchableOpacity`
   margin-bottom: ${metrics.baseMargin}px;
 
   box-shadow: 5px 5px 5px ${colors.darkTransparent};
-  elevation: 15;
 `;

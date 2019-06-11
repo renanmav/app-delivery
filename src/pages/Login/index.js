@@ -4,6 +4,7 @@ import { Types as AuthActions } from "~/store/ducks/auth";
 
 import background from "~/assets/background.png";
 import logo from "~/assets/logo.png";
+import { colors } from "~/styles";
 
 import { StatusBar } from "react-native";
 import {
@@ -17,8 +18,6 @@ import {
   ActivityIndicator,
   TextError
 } from "./styles";
-
-import { colors } from "~/styles";
 
 export default function Login() {
   const [credentials, setCredentials] = useState({ email: "", password: "" });

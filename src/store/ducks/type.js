@@ -39,10 +39,6 @@ export default function type(state = INITIAL_STATE, actions) {
  */
 
 export const Creators = {
-  indexRequest: () => ({
-    type: Types.INDEX_REQUEST,
-    payload: {}
-  }),
   indexSuccess: types => ({
     type: Types.INDEX_SUCCESS,
     payload: { types }
