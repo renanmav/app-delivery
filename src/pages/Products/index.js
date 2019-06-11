@@ -1,10 +1,20 @@
 import React, { useEffect } from "react";
 
-import { ScrollView, StatusBar, Dimensions } from "react-native";
+import { connect } from "react-redux";
+import { bindActionCreators } from "redux";
+import { Creators as ProductActions } from "~/store/ducks/product";
+
+import {
+  ScrollView,
+  StatusBar,
+  Dimensions,
+  ActivityIndicator
+} from "react-native";
 
 import background from "~/assets/header-background.png";
 
 import Icon from "react-native-vector-icons/FontAwesome";
+import api from "~/config/api";
 
 import {
   Background,
@@ -21,15 +31,39 @@ import { colors, metrics } from "~/styles";
 
 const { width } = Dimensions.get("window");
 
+const ListProducts = ({ products }) => (
+  <ContainerList>
+    {products.map((product, index) => (
+      <Product
+        key={product.id}
+        separator={index % 2 == 0 ? true : false}
+        style={{
+          minWidth: width / 2 - metrics.basePadding - metrics.baseMargin / 2
+        }}
+      >
+        <ProductFile
+          source={{ uri: `${api.baseURL}/files?id=${product.file_id}` }}
+        />
+        <ProductName>{product.name}</ProductName>
+      </Product>
+    ))}
+  </ContainerList>
+);
+
 function Products(props) {
   useEffect(() => {
-    const { navigation } = props;
-    console.tron.log(navigation.getParam("type_id"));
+    const { navigation, indexRequest } = props;
+
+    const type_id = navigation.getParam("type_id");
+
+    indexRequest(type_id);
   }, []);
 
   handleGoBack = () => {
     props.navigation.goBack();
   };
+
+  const { loading, products } = props.product;
 
   return (
     <Background source={background}>
@@ -42,40 +76,20 @@ function Products(props) {
           <TextMenu>Selecione um tipo</TextMenu>
         </MenuTop>
 
-        <ListProducts />
+        {loading ? <ActivityIndicator /> : <ListProducts products={products} />}
       </ScrollView>
     </Background>
   );
 }
 
-const ListProducts = () => (
-  <ContainerList>
-    <Product
-      separator={true}
-      style={{
-        minWidth: width / 2 - metrics.basePadding - metrics.baseMargin / 2
-      }}
-    />
-    <Product
-      style={{
-        minWidth: width / 2 - metrics.basePadding - metrics.baseMargin / 2
-      }}
-    >
-      <ProductFile />
-      <ProductName>Portuguesa</ProductName>
-    </Product>
-    <Product
-      separator={true}
-      style={{
-        minWidth: width / 2 - metrics.basePadding - metrics.baseMargin / 2
-      }}
-    />
-    <Product
-      style={{
-        minWidth: width / 2 - metrics.basePadding - metrics.baseMargin / 2
-      }}
-    />
-  </ContainerList>
-);
+const mapStateToProps = state => ({
+  product: state.product
+});
 
-export default Products;
+const mapDispatchToProps = dispatch =>
+  bindActionCreators(ProductActions, dispatch);
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Products);

@@ -55,7 +55,7 @@ export const Product = styled.TouchableOpacity`
 
 export const ProductFile = styled.Image`
   width: 100%;
-  min-height: 120px;
+  min-height: 110px;
 `;
 
 export const ProductName = styled.Text`

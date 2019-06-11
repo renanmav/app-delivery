@@ -9,8 +9,7 @@ import {
   TouchableOpacity,
   StatusBar,
   View,
-  ActivityIndicator,
-  Text
+  ActivityIndicator
 } from "react-native";
 
 import cartImage from "~/assets/cart.png";
