@@ -1,5 +1,9 @@
 import React, { useEffect } from "react";
 
+import { connect } from "react-redux";
+import { bindActionCreators } from "redux";
+import { Creators as SizeActions } from "~/store/ducks/size";
+
 import {
   ScrollView,
   StatusBar,
@@ -50,14 +54,18 @@ const ListSizes = ({ sizes }) => (
 
 function Sizes(props) {
   useEffect(() => {
-    const { navigation } = props;
+    const { navigation, indexRequest } = props;
 
-    //const product_id = navigation.getParam("product_id");
+    const product_id = navigation.getParam("product_id");
+
+    indexRequest(product_id);
   }, []);
 
   handleGoBack = () => {
     props.navigation.goBack();
   };
+
+  const { loading, sizes } = props.size;
 
   return (
     <Background source={background}>
@@ -69,32 +77,23 @@ function Sizes(props) {
           </ButtonMenuBack>
           <TextMenu>Selecione um tamanho</TextMenu>
         </MenuTop>
-
-        <ListSizes
-          sizes={[
-            {
-              name: "PP",
-              price: 32.5,
-              file_id: 4,
-              id: 1,
-              file: {
-                file: "1559968277532.png"
-              }
-            },
-            {
-              name: "PP",
-              price: 32.5,
-              file_id: 4,
-              id: 1,
-              file: {
-                file: "1559968277532.png"
-              }
-            }
-          ]}
-        />
+        {loading ? (
+          <ActivityIndicator color={colors.white} />
+        ) : (
+          <ListSizes sizes={sizes} />
+        )}
       </ScrollView>
     </Background>
   );
 }
+const mapStateToProps = state => ({
+  size: state.size
+});
 
-export default Sizes;
+const mapDispatchToProps = dispatch =>
+  bindActionCreators(SizeActions, dispatch);
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Sizes);

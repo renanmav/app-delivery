@@ -17,7 +17,7 @@ const Routes = createAppContainer(
       defaultNavigationOptions: {
         header: null
       },
-      initialRouteName: "Sizes"
+      initialRouteName: "Types"
     }
   )
 );

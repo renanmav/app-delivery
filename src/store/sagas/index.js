@@ -9,10 +9,14 @@ import { index as indexTypes } from "./type";
 import { Types as ProductTypes } from "../ducks/product";
 import { index as indexProducts } from "./product";
 
+import { Types as SizeTypes } from "../ducks/size";
+import { index as indexSizes } from "./size";
+
 export default function* rootSaga() {
   return yield all([
     takeLatest(AuthTypes.LOGIN_REQUEST, login),
     takeLatest(TypeTypes.INDEX_REQUEST, indexTypes),
-    takeLatest(ProductTypes.INDEX_REQUEST, indexProducts)
+    takeLatest(ProductTypes.INDEX_REQUEST, indexProducts),
+    takeLatest(SizeTypes.INDEX_REQUEST, indexSizes)
   ]);
 }

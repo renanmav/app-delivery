@@ -31,7 +31,13 @@ import { colors, metrics } from "~/styles";
 
 const { width } = Dimensions.get("window");
 
-const ListProducts = ({ products }) => (
+const handleProductClick = (product_id, navigation) => {
+  navigation.navigate("Sizes", {
+    product_id
+  });
+};
+
+const ListProducts = ({ products, navigation }) => (
   <ContainerList>
     {products.map((product, index) => (
       <Product
@@ -40,6 +46,7 @@ const ListProducts = ({ products }) => (
         style={{
           minWidth: width / 2 - metrics.basePadding - metrics.baseMargin / 2
         }}
+        onPress={() => handleProductClick(product.id, navigation)}
       >
         <ProductFile
           source={{ uri: `${api.baseURL}/files?name=${product.file.file}` }}
@@ -64,6 +71,7 @@ function Products(props) {
   };
 
   const { loading, products } = props.product;
+  const { navigation } = props;
 
   return (
     <Background source={background}>
@@ -79,7 +87,7 @@ function Products(props) {
         {loading ? (
           <ActivityIndicator color={colors.white} />
         ) : (
-          <ListProducts products={products} />
+          <ListProducts products={products} navigation={navigation} />
         )}
       </ScrollView>
     </Background>

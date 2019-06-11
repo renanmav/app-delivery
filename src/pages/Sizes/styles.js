@@ -54,8 +54,8 @@ export const Size = styled.TouchableOpacity`
 `;
 
 export const SizeFile = styled.Image`
-  width: 100%;
-  min-height: 110px;
+  width: 90px;
+  min-height: 90px;
 `;
 
 export const SizeName = styled.Text`
@@ -71,6 +71,6 @@ export const SizePrice = styled.Text`
   font-size: 16px;
   color: ${colors.background};
   letter-spacing: 0px;
-  margin-top: ${metrics.baseMargin / 2};
+  margin-top: 3px;
   opacity: 0.6;
 `;
