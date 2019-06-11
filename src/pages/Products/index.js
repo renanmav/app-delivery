@@ -76,7 +76,11 @@ function Products(props) {
           <TextMenu>Selecione um tipo</TextMenu>
         </MenuTop>
 
-        {loading ? <ActivityIndicator /> : <ListProducts products={products} />}
+        {loading ? (
+          <ActivityIndicator color={colors.white} />
+        ) : (
+          <ListProducts products={products} />
+        )}
       </ScrollView>
     </Background>
   );
