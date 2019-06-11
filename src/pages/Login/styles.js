@@ -7,7 +7,7 @@ export const Background = styled.ImageBackground`
   height: 100%;
 `;
 
-export const Container = styled.View`
+export const Container = styled.SafeAreaView`
   flex: 1;
   display: flex;
   justify-content: center;

@@ -1,9 +1,5 @@
 import React, { useEffect } from "react";
 
-import { connect } from "react-redux";
-import { bindActionCreators } from "redux";
-import { Creators as ProductActions } from "~/store/ducks/product";
-
 import {
   ScrollView,
   StatusBar,
@@ -22,48 +18,46 @@ import {
   ButtonMenuBack,
   TextMenu,
   ContainerList,
-  Product,
-  ProductFile,
-  ProductName
+  Size,
+  SizeFile,
+  SizeName,
+  SizePrice
 } from "./styles";
 
 import { colors, metrics } from "~/styles";
 
 const { width } = Dimensions.get("window");
 
-const ListProducts = ({ products }) => (
+const ListSizes = ({ sizes }) => (
   <ContainerList>
-    {products.map((product, index) => (
-      <Product
-        key={product.id}
+    {sizes.map((size, index) => (
+      <Size
+        key={size.id}
         separator={index % 2 == 0 ? true : false}
         style={{
           minWidth: width / 2 - metrics.basePadding - metrics.baseMargin / 2
         }}
       >
-        <ProductFile
-          source={{ uri: `${api.baseURL}/files?name=${product.file.file}` }}
+        <SizeFile
+          source={{ uri: `${api.baseURL}/files?name=${size.file.file}` }}
         />
-        <ProductName>{product.name}</ProductName>
-      </Product>
+        <SizeName>{size.name}</SizeName>
+        <SizePrice>{size.price}</SizePrice>
+      </Size>
     ))}
   </ContainerList>
 );
 
-function Products(props) {
+function Sizes(props) {
   useEffect(() => {
-    const { navigation, indexRequest } = props;
+    const { navigation } = props;
 
-    const type_id = navigation.getParam("type_id");
-
-    indexRequest(type_id);
+    //const product_id = navigation.getParam("product_id");
   }, []);
 
   handleGoBack = () => {
     props.navigation.goBack();
   };
-
-  const { loading, products } = props.product;
 
   return (
     <Background source={background}>
@@ -73,27 +67,34 @@ function Products(props) {
           <ButtonMenuBack onPress={this.handleGoBack}>
             <Icon name="chevron-left" color={colors.light} size={11} />
           </ButtonMenuBack>
-          <TextMenu>Selecione um tipo</TextMenu>
+          <TextMenu>Selecione um tamanho</TextMenu>
         </MenuTop>
 
-        {loading ? (
-          <ActivityIndicator color={colors.white} />
-        ) : (
-          <ListProducts products={products} />
-        )}
+        <ListSizes
+          sizes={[
+            {
+              name: "PP",
+              price: 32.5,
+              file_id: 4,
+              id: 1,
+              file: {
+                file: "1559968277532.png"
+              }
+            },
+            {
+              name: "PP",
+              price: 32.5,
+              file_id: 4,
+              id: 1,
+              file: {
+                file: "1559968277532.png"
+              }
+            }
+          ]}
+        />
       </ScrollView>
     </Background>
   );
 }
 
-const mapStateToProps = state => ({
-  product: state.product
-});
-
-const mapDispatchToProps = dispatch =>
-  bindActionCreators(ProductActions, dispatch);
-
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(Products);
+export default Sizes;

@@ -48,7 +48,7 @@ const TypesList = ({ types, navigation }) => (
       <Type key={type.id} onPress={() => handleTypeClick(type.id, navigation)}>
         <ImageType
           source={{
-            uri: `${api.baseURL}/files?id=${type.file_id}`
+            uri: `http://10.0.3.2:8080/files?name=${type.file.file}`
           }}
         />
         <View>

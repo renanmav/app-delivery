@@ -1,5 +1,7 @@
 import React, { Component } from "react";
 
+import { StatusBar } from "react-native";
+
 import background from "~/assets/background.png";
 import logo from "~/assets/logo.png";
 
@@ -19,6 +21,8 @@ import {
   TextError
 } from "./styles";
 
+import { colors } from "~/styles";
+
 class Login extends Component {
   state = { email: "", password: "" };
 
@@ -35,6 +39,7 @@ class Login extends Component {
     return (
       <Background source={background}>
         <Container>
+          <StatusBar color={colors.primary} />
           <Logo source={logo} />
           <Input
             value={email}
