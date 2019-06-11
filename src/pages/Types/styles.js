@@ -48,6 +48,7 @@ export const ButtonCart = styled.TouchableOpacity`
 
 export const ListType = styled.View`
   margin: ${metrics.baseMargin * 2}px;
+  margin-top: 0;
 `;
 
 export const ImageType = styled.Image`

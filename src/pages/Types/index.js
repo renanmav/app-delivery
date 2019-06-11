@@ -14,7 +14,7 @@ import {
 } from "react-native";
 
 import cartImage from "~/assets/cart.png";
-import headerBackground from "~/assets/header-background.png";
+import background from "~/assets/header-background.png";
 
 import api from "~/config/api";
 
@@ -37,10 +37,16 @@ import {
 
 import { colors } from "~/styles";
 
-const TypesList = ({ types }) => (
+const handleTypeClick = (type_id, navigation) => {
+  navigation.navigate("Products", {
+    type_id
+  });
+};
+
+const TypesList = ({ types, navigation }) => (
   <ListType>
     {types.map(type => (
-      <Type key={type.id}>
+      <Type key={type.id} onPress={() => handleTypeClick(type.id, navigation)}>
         <ImageType
           source={{
             uri: `${api.baseURL}/files?id=${type.file_id}`
@@ -68,7 +74,7 @@ function Types(props) {
   const { loading, types } = props.type;
 
   return (
-    <Background source={headerBackground} style={{ height: "30%" }}>
+    <Background source={background}>
       <Container>
         <StatusBar
           backgroundColor={colors.background}
@@ -86,7 +92,7 @@ function Types(props) {
         {loading ? (
           <ActivityIndicator color={colors.white} />
         ) : (
-          <TypesList types={types} />
+          <TypesList types={types} navigation={props.navigation} />
         )}
       </Container>
     </Background>
