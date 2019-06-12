@@ -5,7 +5,6 @@ import { colors, metrics } from "~/styles";
 export const Background = styled.ImageBackground`
   width: 100%;
   height: 50%;
-
   flex: 1;
 `;
 
@@ -13,7 +12,6 @@ export const Container = styled.SafeAreaView`
   display: flex;
   flex: 1;
   flex-direction: column;
-
   height: 100%;
 `;
 
@@ -22,7 +20,6 @@ export const MenuTop = styled.View`
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
-
   margin: ${metrics.baseMargin * 2}px;
 `;
 
@@ -48,7 +45,7 @@ export const ButtonCart = styled.TouchableOpacity`
 
 export const ListType = styled.View`
   margin: ${metrics.baseMargin * 2}px;
-  margin-top: 0;
+  margin-top: ${metrics.baseMargin}px;
 `;
 
 export const ImageType = styled.Image`

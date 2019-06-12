@@ -12,6 +12,7 @@ export const MenuTop = styled.View`
   display: flex;
   flex-direction: row;
   align-items: center;
+
   margin: ${metrics.baseMargin * 2}px;
 `;
 
@@ -35,7 +36,7 @@ export const ContainerList = styled.View`
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
-  padding: ${metrics.basePadding}px;
+  margin: ${metrics.baseMargin * 2}px;
 `;
 
 export const Product = styled.TouchableOpacity`

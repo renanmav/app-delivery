@@ -15,10 +15,12 @@ import {
   MenuTopWrapper
 } from "./styles";
 
+import ListItems from "./list";
+
 import { TextMask } from "react-native-masked-text";
 
 export default function Cart(props) {
-  const { total_price } = useSelector(state => state.cart);
+  const { total_price, items } = useSelector(state => state.cart);
 
   handleGoBack = () => props.navigation.goBack();
 
@@ -47,6 +49,7 @@ export default function Cart(props) {
             />
           </TextMenu>
         </MenuTop>
+        <ListItems items={items} />
       </ScrollView>
     </Background>
   );

@@ -16,7 +16,7 @@ import {
 } from "react-native";
 import { Container, MenuTop, TextMenu, ButtonCart, Background } from "./styles";
 
-import TypesList from "./list";
+import ListTypes from "./list";
 
 export default function Types(props) {
   const { loading, types } = useSelector(state => state.type);
@@ -52,7 +52,7 @@ export default function Types(props) {
         {loading ? (
           <ActivityIndicator color={colors.white} />
         ) : (
-          <TypesList types={types} navigation={props.navigation} />
+          <ListTypes types={types} navigation={props.navigation} />
         )}
       </Container>
     </Background>

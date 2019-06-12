@@ -21,7 +21,7 @@ const handleTypeClick = (type_id, navigation) => {
   });
 };
 
-const TypesList = ({ types, navigation }) => (
+const ListTypes = ({ types, navigation }) => (
   <ListType>
     {types.map(type => (
       <Type
@@ -47,4 +47,4 @@ const TypesList = ({ types, navigation }) => (
   </ListType>
 );
 
-export default TypesList;
+export default ListTypes;
