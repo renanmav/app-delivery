@@ -1,3 +1,5 @@
+import { navigateAndResetHistory } from "~/services/navigation";
+
 /**
  * ACTIONS
  */
@@ -27,7 +29,22 @@ const INITIAL_STATE = {
 export default function cart(state = INITIAL_STATE, actions) {
   switch (actions.type) {
     case Types.ADD_ITEM:
-      return { ...state };
+      const items = [...state.items, actions.payload.item];
+      const sizes_id = [...state.sizes_id, actions.payload.size_id];
+
+      var total_price = 0;
+
+      items.map(item => {
+        total_price += item.price;
+      });
+
+      navigateAndResetHistory("Types");
+      return {
+        ...state,
+        sizes_id,
+        items,
+        total_price
+      };
     case Types.REMOVE_ITEM:
       return { ...state };
     default:
