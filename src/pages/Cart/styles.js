@@ -100,3 +100,29 @@ export const Item = styled.View`
 
   box-shadow: 5px 5px 5px ${colors.darkTransparent};
 `;
+
+export const ButtonSendWrapper = styled.View`
+  padding: 0px ${metrics.basePadding}px;
+  display: flex;
+  align-items: flex-end;
+`;
+
+export const ButtonSend = styled.TouchableOpacity`
+  background: ${colors.primary};
+  height: 35px;
+  width: 180px;
+  border-radius: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+`;
+
+export const TextButtonSend = styled.Text`
+  font-weight: bold;
+  font-size: 14px;
+  color: ${colors.white};
+  letter-spacing: 0px;
+  text-transform: uppercase;
+  margin-right: ${metrics.baseMargin}px;
+`;

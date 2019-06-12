@@ -12,7 +12,10 @@ import {
   MenuTop,
   ButtonMenuBack,
   TextMenu,
-  MenuTopWrapper
+  MenuTopWrapper,
+  ButtonSendWrapper,
+  ButtonSend,
+  TextButtonSend
 } from "./styles";
 
 import ListItems from "./list";
@@ -50,6 +53,14 @@ export default function Cart(props) {
           </TextMenu>
         </MenuTop>
         <ListItems items={items} />
+        {items.length ? (
+          <ButtonSendWrapper>
+            <ButtonSend>
+              <TextButtonSend>Realizar pedido</TextButtonSend>
+              <Icon name="chevron-right" color={colors.white} size={11} />
+            </ButtonSend>
+          </ButtonSendWrapper>
+        ) : null}
       </ScrollView>
     </Background>
   );
