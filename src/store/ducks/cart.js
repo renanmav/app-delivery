@@ -46,7 +46,19 @@ export default function cart(state = INITIAL_STATE, actions) {
         total_price
       };
     case Types.REMOVE_ITEM:
-      return { ...state };
+      state.items.splice(actions.payload.index, 1);
+      state.sizes_id.splice(actions.payload.index, 1);
+
+      var total_price = 0;
+
+      state.items.map(item => {
+        total_price += item.price;
+      });
+
+      return {
+        ...state,
+        total_price
+      };
     default:
       return { ...state };
   }
