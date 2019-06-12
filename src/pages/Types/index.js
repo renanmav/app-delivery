@@ -29,6 +29,10 @@ export default function Types(props) {
     });
   }, []);
 
+  const handleCartClick = () => {
+    props.navigation.navigate("Cart");
+  };
+
   return (
     <Background source={background}>
       <Container>
@@ -41,7 +45,7 @@ export default function Types(props) {
             <Icon name="history" color={colors.white} size={24} />
           </TouchableOpacity>
           <TextMenu>Pizzaria Don Juan</TextMenu>
-          <ButtonCart>
+          <ButtonCart onPress={handleCartClick}>
             <Image source={cartImage} />
           </ButtonCart>
         </MenuTop>

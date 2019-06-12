@@ -64,9 +64,7 @@ export default function ListSizes({ sizes }) {
                 unit: "R$",
                 suffixUnit: ""
               }}
-            >
-              {size.price}
-            </TextMask>
+            />
           </SizePrice>
         </Size>
       ))}
