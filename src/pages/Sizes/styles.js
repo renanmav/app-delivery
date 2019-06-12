@@ -63,7 +63,7 @@ export const SizeName = styled.Text`
   font-size: 16px;
   color: ${colors.background};
   letter-spacing: 0px;
-  margin-top: ${metrics.baseMargin};
+  margin-top: ${metrics.baseMargin * 2};
 `;
 
 export const SizePrice = styled.Text`
