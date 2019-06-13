@@ -18,7 +18,7 @@ export const Input = styled.TextInput.attrs({
   placeholderTextColor: colors.regular,
 })`
   background: ${colors.white};
-  border-radius: ${metrics.baseRadius};
+  border-radius: ${metrics.baseRadius}px;
   padding: 0 ${metrics.basePadding}px;
   height: 50px;
   font-size: 15px;

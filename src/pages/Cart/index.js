@@ -23,9 +23,11 @@ import {
 import ListItems from './list';
 
 export default function Cart(props) {
+  const { navigation } = props;
+
   const { total_price: totalPrice, items } = useSelector(state => state.cart);
 
-  const handleGoBack = () => props.navigation.goBack();
+  const handleGoBack = () => navigation.goBack();
 
   return (
     <Background source={background}>
@@ -55,7 +57,7 @@ export default function Cart(props) {
         <ListItems items={items} />
         {items.length ? (
           <ButtonSendWrapper>
-            <ButtonSend>
+            <ButtonSend onPress={() => navigation.navigate('Address')}>
               <TextButtonSend>Realizar pedido</TextButtonSend>
               <Icon name="chevron-right" color={colors.white} size={11} />
             </ButtonSend>

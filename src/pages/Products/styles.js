@@ -1,10 +1,15 @@
 import styled from 'styled-components/native';
 
+import { Dimensions } from 'react-native';
+
 import { colors, metrics } from '~/styles';
 
+const d = Dimensions.get('window');
+
 export const Background = styled.ImageBackground`
-  width: 100%;
-  height: 50%;
+  position: absolute;
+  width: ${d.width}px;
+  height: ${d.height}px;
   flex: 1;
 `;
 

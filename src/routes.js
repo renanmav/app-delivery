@@ -5,6 +5,7 @@ import Types from '~/pages/Types';
 import Products from '~/pages/Products';
 import Sizes from '~/pages/Sizes';
 import Cart from '~/pages/Cart';
+import Address from '~/pages/Address';
 
 const Routes = createAppContainer(
   createStackNavigator(
@@ -14,6 +15,7 @@ const Routes = createAppContainer(
       Products,
       Sizes,
       Cart,
+      Address,
     },
     {
       defaultNavigationOptions: {
