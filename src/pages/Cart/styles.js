@@ -106,13 +106,13 @@ export const Item = styled.View`
   box-shadow: 5px 5px 5px ${colors.darkTransparent};
 `;
 
-export const ButtonSendWrapper = styled.View`
+export const ButtonNextWrapper = styled.View`
   padding: 0px ${metrics.basePadding}px;
   display: flex;
   align-items: flex-end;
 `;
 
-export const ButtonSend = styled.TouchableOpacity`
+export const ButtonNext = styled.TouchableOpacity`
   background: ${colors.primary};
   height: 35px;
   width: 180px;
@@ -123,7 +123,7 @@ export const ButtonSend = styled.TouchableOpacity`
   flex-direction: row;
 `;
 
-export const TextButtonSend = styled.Text`
+export const TextButtonNext = styled.Text`
   font-weight: bold;
   font-size: 14px;
   color: ${colors.white};

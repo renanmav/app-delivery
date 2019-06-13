@@ -24,6 +24,9 @@ import {
   MenuTopWrapper,
   Inputs,
   Input,
+  ButtonNextWrapper,
+  ButtonNext,
+  TextButtonNext,
   styles,
 } from './styles';
 
@@ -61,6 +64,16 @@ export default function Address({ navigation }) {
 
   const handleGoBack = () => navigation.goBack();
 
+  const disableButtonNext = !(street.length && number.length && district.length);
+
+  const inputs = {
+    first: null,
+    second: null,
+    third: null,
+    fourth: null,
+    fifth: null,
+  };
+
   return (
     <Background source={background}>
       <StatusBar backgroundColor={colors.background} barStyle="light-content" />
@@ -93,6 +106,9 @@ export default function Address({ navigation }) {
             height={120}
             onChangeText={obs => setObservation(obs)}
             multiline
+            ref={first => (inputs.first = first)}
+            onSubmitEditing={() => inputs.second.focus()}
+            blurOnSubmit={false}
           />
           <TextInputMask
             type="zip-code"
@@ -100,6 +116,9 @@ export default function Address({ navigation }) {
             value={cep}
             style={styles.cep}
             onChangeText={c => setCep(c)}
+            ref={second => (inputs.second = second)}
+            onSubmitEditing={() => inputs.third.focus()}
+            blurOnSubmit={false}
           />
           <View style={{ display: 'flex', flexDirection: 'row' }}>
             <Input
@@ -107,16 +126,35 @@ export default function Address({ navigation }) {
               value={street}
               onChangeText={strt => setStreet(strt)}
               style={{ flex: 1, marginRight: metrics.baseMargin }}
+              ref={third => (inputs.third = third)}
+              onSubmitEditing={() => inputs.fourth.focus()}
+              blurOnSubmit={false}
             />
             <Input
               placeholder="Nº"
               value={number}
               onChangeText={n => setNumber(n)}
               style={{ width: w / 3 }}
+              ref={fourth => (inputs.fourth = fourth)}
+              onSubmitEditing={() => inputs.fifth.focus()}
+              blurOnSubmit={false}
+              keyboardType="number-pad"
             />
           </View>
-          <Input placeholder="Bairro" value={district} onChangeText={d => setDistrict(d)} />
+          <Input
+            placeholder="Bairro"
+            value={district}
+            onChangeText={d => setDistrict(d)}
+            ref={fifth => (inputs.fifth = fifth)}
+          />
         </Inputs>
+
+        <ButtonNextWrapper>
+          <ButtonNext disabled={disableButtonNext}>
+            <TextButtonNext>Finalizar</TextButtonNext>
+            <Icon name="chevron-right" color={colors.white} size={11} />
+          </ButtonNext>
+        </ButtonNextWrapper>
       </ScrollView>
     </Background>
   );

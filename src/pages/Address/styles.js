@@ -80,3 +80,29 @@ export const styles = StyleSheet.create({
     shadowRadius: 5,
   },
 });
+
+export const ButtonNextWrapper = styled.View`
+  padding: 0px ${metrics.basePadding}px;
+  display: flex;
+  align-items: flex-end;
+`;
+
+export const ButtonNext = styled.TouchableOpacity`
+  background: ${({ disabled }) => (disabled ? colors.darkTransparent : colors.primary)};
+  height: 35px;
+  width: 150px;
+  border-radius: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+`;
+
+export const TextButtonNext = styled.Text`
+  font-weight: bold;
+  font-size: 14px;
+  color: ${colors.white};
+  letter-spacing: 0px;
+  text-transform: uppercase;
+  margin-right: ${metrics.baseMargin}px;
+`;
