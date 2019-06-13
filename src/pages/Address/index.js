@@ -1,16 +1,20 @@
+/* eslint-disable react-native/no-inline-styles */
 /* eslint-disable no-return-assign */
 import PropTypes from 'prop-types';
 
 import React, { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 
-import axios from 'axios';
+import { useDebounce } from 'use-debounce';
+import api from '~/services/cepApi';
 
-import { colors } from '~/styles';
+import { colors, metrics } from '~/styles';
 import background from '~/assets/header-background.png';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
-import { StatusBar, ScrollView } from 'react-native';
+import {
+  StatusBar, ScrollView, Dimensions, View,
+} from 'react-native';
 import { TextMask, TextInputMask } from 'react-native-masked-text';
 import {
   Background,
@@ -23,18 +27,35 @@ import {
   styles,
 } from './styles';
 
+const { width: w } = Dimensions.get('window');
+
 export default function Address({ navigation }) {
-  const [address, setAddress] = useState({
-    observations: '',
-    cep: '',
-    street: '',
-    number: '',
-    district: '',
-  });
+  const [observation, setObservation] = useState('');
+  const [cep, setCep] = useState('');
+  const [street, setStreet] = useState('');
+  const [number, setNumber] = useState('');
+  const [district, setDistrict] = useState('');
+
+  const [cepDebounce] = useDebounce(cep, 1000);
+
+  async function fetchCep() {
+    if (cep !== '') {
+      try {
+        const { data } = await api.get(`/${cep}/json/`);
+
+        if (data) {
+          setStreet(data.logradouro);
+          setDistrict(data.bairro);
+        }
+      } catch (err) {
+        console.tron.log(err);
+      }
+    }
+  }
 
   useEffect(() => {
-    if (address.cep !== '') axios.get(`https://viacep.com.br/ws/${address.cep}/json/`);
-  }, [address.cep]);
+    fetchCep();
+  }, [cepDebounce]);
 
   const { total_price: totalPrice } = useSelector(state => state.cart);
 
@@ -68,23 +89,33 @@ export default function Address({ navigation }) {
         <Inputs>
           <Input
             placeholder="Alguma observação?"
-            value={address.observations}
+            value={observation}
             height={120}
-            onChangeText={observations => setAddress({ observations })}
+            onChangeText={obs => setObservation(obs)}
             multiline
           />
           <TextInputMask
             type="zip-code"
             placeholder="Qual seu CEP?"
-            value={address.cep}
+            value={cep}
             style={styles.cep}
-            onChangeText={cep => setAddress({ cep })}
+            onChangeText={c => setCep(c)}
           />
-          <Input
-            placeholder="Rua"
-            value={address.street}
-            onChangeText={street => setAddress({ street })}
-          />
+          <View style={{ display: 'flex', flexDirection: 'row' }}>
+            <Input
+              placeholder="Rua"
+              value={street}
+              onChangeText={strt => setStreet(strt)}
+              style={{ flex: 1, marginRight: metrics.baseMargin }}
+            />
+            <Input
+              placeholder="Nº"
+              value={number}
+              onChangeText={n => setNumber(n)}
+              style={{ width: w / 3 }}
+            />
+          </View>
+          <Input placeholder="Bairro" value={district} onChangeText={d => setDistrict(d)} />
         </Inputs>
       </ScrollView>
     </Background>
