@@ -14,7 +14,7 @@ import {
   Image, TouchableOpacity, StatusBar, ActivityIndicator,
 } from 'react-native';
 import {
-  Container, MenuTop, TextMenu, ButtonCart, Background,
+  Container, MenuTop, TextMenu, ButtonCart, Background, HasItems,
 } from './styles';
 
 import ListTypes from './list';
@@ -23,6 +23,7 @@ export default function Types(props) {
   const { navigation } = props;
 
   const { loading, types } = useSelector(state => state.type);
+  const { items } = useSelector(state => state.cart);
 
   const dispatch = useDispatch();
 
@@ -46,6 +47,7 @@ export default function Types(props) {
           </TouchableOpacity>
           <TextMenu>Pizzaria Don Juan</TextMenu>
           <ButtonCart onPress={handleCartClick}>
+            {items.length ? <HasItems /> : null}
             <Image source={cartImage} />
           </ButtonCart>
         </MenuTop>

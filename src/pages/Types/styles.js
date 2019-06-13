@@ -46,6 +46,8 @@ export const ButtonCart = styled.TouchableOpacity`
   height: 38px;
 
   border-radius: 50px;
+
+  position: relative;
 `;
 
 export const ListType = styled.View`
@@ -102,4 +104,14 @@ export const Type = styled.TouchableOpacity`
   margin-bottom: ${metrics.baseMargin}px;
 
   box-shadow: 5px 5px 5px ${colors.darkTransparent};
+`;
+
+export const HasItems = styled.View`
+  height: 12px;
+  width: 12px;
+  border-radius: 6px;
+  background: ${colors.secondary};
+  position: absolute;
+  top: 0;
+  right: 0;
 `;
