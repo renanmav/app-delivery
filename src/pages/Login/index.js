@@ -1,12 +1,12 @@
-import React, { useState } from "react";
-import { useSelector, useDispatch } from "react-redux";
-import { Types as AuthActions } from "~/store/ducks/auth";
+import React, { useState } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { Types as AuthActions } from '~/store/ducks/auth';
 
-import background from "~/assets/background.png";
-import logo from "~/assets/logo.png";
-import { colors } from "~/styles";
+import background from '~/assets/background.png';
+import logo from '~/assets/logo.png';
+import { colors } from '~/styles';
 
-import { StatusBar } from "react-native";
+import { StatusBar } from 'react-native';
 import {
   Container,
   Input,
@@ -16,11 +16,11 @@ import {
   Background,
   Logo,
   ActivityIndicator,
-  TextError
-} from "./styles";
+  TextError,
+} from './styles';
 
 export default function Login() {
-  const [credentials, setCredentials] = useState({ email: "", password: "" });
+  const [credentials, setCredentials] = useState({ email: '', password: '' });
 
   const { loading, error } = useSelector(state => state.auth);
 
@@ -31,9 +31,11 @@ export default function Login() {
 
     dispatch({
       type: AuthActions.LOGIN_REQUEST,
-      payload: { email, password }
+      payload: { email, password },
     });
   };
+
+  let secondTextInput = null;
 
   return (
     <Background source={background}>
@@ -46,23 +48,21 @@ export default function Login() {
           autoCapitalize="none"
           autoCorrect={false}
           placeholder="Seu e-mail"
-          returnKeyType={"next"}
+          returnKeyType="next"
           onSubmitEditing={() => {
-            this.secondTextInput.focus();
+            secondTextInput.focus();
           }}
           blurOnSubmit={false}
         />
         <Input
           value={credentials.password}
-          onChangeText={password =>
-            setCredentials({ ...credentials, password })
-          }
+          onChangeText={password => setCredentials({ ...credentials, password })}
           autoCapitalize="none"
           autoCorrect={false}
           placeholder="Sua senha secreta"
           secureTextEntry
-          ref={input => {
-            this.secondTextInput = input;
+          ref={(input) => {
+            secondTextInput = input;
           }}
           onSubmitEditing={handleSubmit}
         />
@@ -71,8 +71,7 @@ export default function Login() {
         </Button>
         {error ? (
           <TextError>
-            Algo deu errado! Verifique suas credenciais ou tente novamente mais
-            tarde.
+            Algo deu errado! Verifique suas credenciais ou tente novamente mais tarde.
           </TextError>
         ) : null}
         <CreateAccount>

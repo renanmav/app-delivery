@@ -1,6 +1,6 @@
-import styled from "styled-components/native";
+import styled from 'styled-components/native';
 
-import { colors, metrics } from "~/styles";
+import { colors, metrics } from '~/styles';
 
 export const Background = styled.ImageBackground`
   width: 100%;
@@ -48,10 +48,9 @@ export const Product = styled.TouchableOpacity`
   display: flex;
   justify-content: center;
   align-items: center;
-  elevation: 15;
 
-  margin-right: ${props => (props.separator ? metrics.baseMargin : "0")}px;
-  margin-bottom: ${props => (props.separator ? metrics.baseMargin : "0")}px;
+  margin-right: ${props => (props.separator ? metrics.baseMargin : '0')}px;
+  margin-bottom: ${props => (props.separator ? metrics.baseMargin : '0')}px;
 `;
 
 export const ProductFile = styled.Image`

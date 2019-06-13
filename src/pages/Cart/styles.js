@@ -1,6 +1,6 @@
-import styled from "styled-components/native";
+import styled from 'styled-components/native';
 
-import { colors, metrics } from "~/styles";
+import { colors, metrics } from '~/styles';
 
 export const Background = styled.ImageBackground`
   width: 100%;

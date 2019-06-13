@@ -1,15 +1,19 @@
-import React, { useEffect } from "react";
-import { useSelector, useDispatch } from "react-redux";
-import { Types as ProductActions } from "~/store/ducks/product";
+import PropTypes from 'prop-types';
 
-import { colors } from "~/styles";
-import background from "~/assets/header-background.png";
-import Icon from "react-native-vector-icons/FontAwesome";
+import React, { useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { Types as ProductActions } from '~/store/ducks/product';
 
-import { ScrollView, StatusBar, ActivityIndicator } from "react-native";
-import { Background, MenuTop, ButtonMenuBack, TextMenu } from "./styles";
+import { colors } from '~/styles';
+import background from '~/assets/header-background.png';
+import Icon from 'react-native-vector-icons/FontAwesome';
 
-import ListProducts from "./list";
+import { ScrollView, StatusBar, ActivityIndicator } from 'react-native';
+import {
+  Background, MenuTop, ButtonMenuBack, TextMenu,
+} from './styles';
+
+import ListProducts from './list';
 
 export default function Products(props) {
   const { loading, products } = useSelector(state => state.product);
@@ -18,15 +22,15 @@ export default function Products(props) {
 
   useEffect(() => {
     const { navigation } = props;
-    const type_id = navigation.getParam("type_id");
+    const typeId = navigation.getParam('type_id');
 
     dispatch({
       type: ProductActions.INDEX_REQUEST,
-      payload: { type_id }
+      payload: { type_id: typeId },
     });
   }, []);
 
-  handleGoBack = () => props.navigation.goBack();
+  const handleGoBack = () => props.navigation.goBack();
 
   const { navigation } = props;
 
@@ -35,7 +39,7 @@ export default function Products(props) {
       <StatusBar backgroundColor={colors.background} barStyle="light-content" />
       <ScrollView>
         <MenuTop>
-          <ButtonMenuBack onPress={this.handleGoBack}>
+          <ButtonMenuBack onPress={handleGoBack}>
             <Icon name="chevron-left" color={colors.light} size={11} />
           </ButtonMenuBack>
           <TextMenu>Selecione um tipo</TextMenu>
@@ -50,3 +54,9 @@ export default function Products(props) {
     </Background>
   );
 }
+
+Products.propTypes = {
+  navigation: PropTypes.shape({
+    goBack: PropTypes.func.isRequired,
+  }).isRequired,
+};

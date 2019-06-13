@@ -32,6 +32,19 @@
       { "extensions": [".js", ".jsx"] }
     ],
     "import/prefer-default-export": "off",
-    "react-native/no-raw-text": ["error", { "ignore": "Text*" }]
+    "react/no-array-index-key": "off",
+    "react-native/no-raw-text": [
+      "error",
+      {
+        "skip": [
+          "TextButton",
+          "TextError",
+          "TextMenu",
+          "TextTypeTime",
+          "TextButtonSend",
+          "TextItemSize"
+        ]
+      }
+    ]
   }
 }

@@ -1,13 +1,13 @@
-import "~/config/reactotron";
-import "~/config/reactdevtools";
+import '~/config/reactotron';
+import '~/config/reactdevtools';
 
-import React from "react";
-import { Provider } from "react-redux";
-import Routes from "./routes";
+import React from 'react';
+import { Provider } from 'react-redux';
+import Routes from './routes';
 
-import store from "./store";
+import store from './store';
 
-import { setNavigator } from "./services/navigation";
+import { setNavigator } from './services/navigation';
 
 const App = () => (
   <Provider store={store}>

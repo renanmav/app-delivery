@@ -1,31 +1,28 @@
-import React from "react";
-import { useDispatch } from "react-redux";
-import { Types as CartActions } from "~/store/ducks/cart";
+/* eslint-disable react-native/no-inline-styles */
+import PropTypes from 'prop-types';
 
-import api from "~/config/api";
+import React from 'react';
+import { useDispatch } from 'react-redux';
+import { Types as CartActions } from '~/store/ducks/cart';
 
-import { colors } from "~/styles";
-import Icon from "react-native-vector-icons/MaterialIcons";
+import api from '~/config/api';
 
-import { View, TouchableOpacity } from "react-native";
+import { colors } from '~/styles';
+import Icon from 'react-native-vector-icons/MaterialIcons';
+
+import { View, TouchableOpacity } from 'react-native';
+import { TextMask } from 'react-native-masked-text';
 import {
-  ListItem,
-  Item,
-  ImageItem,
-  TextItemName,
-  TextItemSize,
-  TextItemPrice
-} from "./styles";
-
-import { TextMask } from "react-native-masked-text";
+  ListItem, Item, ImageItem, TextItemName, TextItemSize, TextItemPrice,
+} from './styles';
 
 export default function ListItems({ items }) {
   const dispatch = useDispatch();
 
-  const handleDeleteItem = index => {
+  const handleDeleteItem = (index) => {
     dispatch({
       type: CartActions.REMOVE_ITEM,
-      payload: { index }
+      payload: { index },
     });
   };
 
@@ -35,22 +32,22 @@ export default function ListItems({ items }) {
         <Item key={index} style={{ elevation: 15 }}>
           <ImageItem
             source={{
-              uri: `${api.baseURL}/files?name=${item.file_name}`
+              uri: `${api.baseURL}/files?name=${item.file_name}`,
             }}
           />
           <View style={{ flex: 1 }}>
             <TextItemName>{item.product_name}</TextItemName>
-            <TextItemSize>Tamanho: {item.size_name}</TextItemSize>
+            <TextItemSize>{`Tamanho: ${item.size_name}`}</TextItemSize>
             <TextItemPrice>
               <TextMask
                 value={item.price}
-                type={"money"}
+                type="money"
                 options={{
                   precision: 2,
-                  separator: ",",
-                  delimiter: ".",
-                  unit: "R$",
-                  suffixUnit: ""
+                  separator: ',',
+                  delimiter: '.',
+                  unit: 'R$',
+                  suffixUnit: '',
                 }}
               />
             </TextItemPrice>
@@ -63,3 +60,15 @@ export default function ListItems({ items }) {
     </ListItem>
   );
 }
+
+ListItems.propTypes = {
+  items: PropTypes.arrayOf(
+    PropTypes.shape({
+      product_name: PropTypes.string.isRequired,
+      size_name: PropTypes.string.isRequired,
+      price: PropTypes.number.isRequired,
+      file_name: PropTypes.string.isRequired,
+      file_id: PropTypes.number.isRequired,
+    }).isRequired,
+  ).isRequired,
+};

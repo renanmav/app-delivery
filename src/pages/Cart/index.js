@@ -1,12 +1,14 @@
-import React from "react";
+import PropTypes from 'prop-types';
 
-import { useSelector } from "react-redux";
+import React from 'react';
+import { useSelector } from 'react-redux';
 
-import { colors } from "~/styles";
-import background from "~/assets/header-background.png";
-import Icon from "react-native-vector-icons/FontAwesome";
+import { colors } from '~/styles';
+import background from '~/assets/header-background.png';
+import Icon from 'react-native-vector-icons/FontAwesome';
 
-import { StatusBar, ScrollView } from "react-native";
+import { StatusBar, ScrollView } from 'react-native';
+import { TextMask } from 'react-native-masked-text';
 import {
   Background,
   MenuTop,
@@ -15,17 +17,15 @@ import {
   MenuTopWrapper,
   ButtonSendWrapper,
   ButtonSend,
-  TextButtonSend
-} from "./styles";
+  TextButtonSend,
+} from './styles';
 
-import ListItems from "./list";
-
-import { TextMask } from "react-native-masked-text";
+import ListItems from './list';
 
 export default function Cart(props) {
-  const { total_price, items } = useSelector(state => state.cart);
+  const { total_price: totalPrice, items } = useSelector(state => state.cart);
 
-  handleGoBack = () => props.navigation.goBack();
+  const handleGoBack = () => props.navigation.goBack();
 
   return (
     <Background source={background}>
@@ -40,14 +40,14 @@ export default function Cart(props) {
           </MenuTopWrapper>
           <TextMenu>
             <TextMask
-              value={total_price}
-              type={"money"}
+              value={totalPrice}
+              type="money"
               options={{
                 precision: 2,
-                separator: ",",
-                delimiter: ".",
-                unit: "R$",
-                suffixUnit: ""
+                separator: ',',
+                delimiter: '.',
+                unit: 'R$',
+                suffixUnit: '',
               }}
             />
           </TextMenu>
@@ -65,3 +65,9 @@ export default function Cart(props) {
     </Background>
   );
 }
+
+Cart.propTypes = {
+  navigation: PropTypes.shape({
+    goBack: PropTypes.func.isRequired,
+  }).isRequired,
+};

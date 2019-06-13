@@ -1,27 +1,28 @@
-import React from "react";
-import { useSelector, useDispatch } from "react-redux";
-import { Types as CartActions } from "~/store/ducks/cart";
+import PropTypes from 'prop-types';
 
-import api from "~/config/api";
+import React from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { Types as CartActions } from '~/store/ducks/cart';
 
-import { metrics } from "~/styles";
+import api from '~/config/api';
 
-import { Dimensions } from "react-native";
-import { ContainerList, Size, SizeFile, SizeName, SizePrice } from "./styles";
+import { metrics } from '~/styles';
 
-const { width } = Dimensions.get("window");
+import { Dimensions } from 'react-native';
+import { TextMask } from 'react-native-masked-text';
+import {
+  ContainerList, Size, SizeFile, SizeName, SizePrice,
+} from './styles';
 
-import { TextMask } from "react-native-masked-text";
+const { width } = Dimensions.get('window');
 
 export default function ListSizes({ sizes }) {
   const { products } = useSelector(state => state.product);
 
   const dispatch = useDispatch();
 
-  const handleSizeClick = size => {
-    const product = products.filter(
-      product => product.id === size.product_id
-    )[0];
+  const handleSizeClick = (size) => {
+    const product = products.filter(p => p.id === size.product_id)[0];
 
     dispatch({
       type: CartActions.ADD_ITEM,
@@ -32,9 +33,9 @@ export default function ListSizes({ sizes }) {
           size_name: size.name,
           price: size.price,
           file_id: product.file_id,
-          file_name: product.file.file
-        }
-      }
+          file_name: product.file.file,
+        },
+      },
     });
   };
 
@@ -43,26 +44,26 @@ export default function ListSizes({ sizes }) {
       {sizes.map((size, index) => (
         <Size
           key={size.id}
-          separator={index % 2 == 0 ? true : false}
+          separator={index % 2 === 0}
+          // eslint-disable-next-line react-native/no-inline-styles
           style={{
-            minWidth: width / 2 - metrics.basePadding - metrics.baseMargin / 2
+            minWidth: width / 2 - metrics.basePadding - metrics.baseMargin / 2,
+            elevation: 15, // for Android
           }}
           onPress={() => handleSizeClick(size)}
         >
-          <SizeFile
-            source={{ uri: `${api.baseURL}/files?name=${size.file.file}` }}
-          />
+          <SizeFile source={{ uri: `${api.baseURL}/files?name=${size.file.file}` }} />
           <SizeName>{size.name}</SizeName>
           <SizePrice>
             <TextMask
               value={size.price}
-              type={"money"}
+              type="money"
               options={{
                 precision: 2,
-                separator: ",",
-                delimiter: ".",
-                unit: "R$",
-                suffixUnit: ""
+                separator: ',',
+                delimiter: '.',
+                unit: 'R$',
+                suffixUnit: '',
               }}
             />
           </SizePrice>
@@ -71,3 +72,16 @@ export default function ListSizes({ sizes }) {
     </ContainerList>
   );
 }
+
+ListSizes.propTypes = {
+  sizes: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.number.isRequired,
+      name: PropTypes.string.isRequired,
+      price: PropTypes.number.isRequired,
+      file: PropTypes.shape({
+        file: PropTypes.string.isRequired,
+      }).isRequired,
+    }).isRequired,
+  ).isRequired,
+};

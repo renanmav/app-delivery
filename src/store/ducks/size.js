@@ -3,9 +3,9 @@
  */
 
 export const Types = {
-  INDEX_REQUEST: "size/INDEX_REQUEST",
-  INDEX_SUCCESS: "size/INDEX_SUCCESS",
-  INDEX_FAILURE: "size/INDEX_FAILURE"
+  INDEX_REQUEST: 'size/INDEX_REQUEST',
+  INDEX_SUCCESS: 'size/INDEX_SUCCESS',
+  INDEX_FAILURE: 'size/INDEX_FAILURE',
 };
 
 /**
@@ -14,7 +14,7 @@ export const Types = {
 
 const INITIAL_STATE = {
   loading: false,
-  sizes: []
+  sizes: [],
 };
 
 export default function type(state = INITIAL_STATE, actions) {
@@ -25,7 +25,7 @@ export default function type(state = INITIAL_STATE, actions) {
       return {
         ...state,
         sizes: actions.payload.sizes,
-        loading: false
+        loading: false,
       };
     case Types.INDEX_FAILURE:
       return { ...state, loading: false };
@@ -41,10 +41,10 @@ export default function type(state = INITIAL_STATE, actions) {
 export const Creators = {
   indexSuccess: sizes => ({
     type: Types.INDEX_SUCCESS,
-    payload: { sizes }
+    payload: { sizes },
   }),
   indexFailure: () => ({
     type: Types.INDEX_FAILURE,
-    payload: {}
-  })
+    payload: {},
+  }),
 };

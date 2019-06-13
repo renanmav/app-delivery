@@ -1,6 +1,6 @@
-import styled from "styled-components/native";
+import styled from 'styled-components/native';
 
-import { colors, metrics } from "~/styles";
+import { colors, metrics } from '~/styles';
 
 export const Background = styled.ImageBackground`
   width: 100%;
@@ -15,7 +15,7 @@ export const Container = styled.SafeAreaView`
 `;
 
 export const Input = styled.TextInput.attrs({
-  placeholderTextColor: colors.regular
+  placeholderTextColor: colors.regular,
 })`
   background: ${colors.white};
   border-radius: ${metrics.baseRadius};
@@ -60,7 +60,7 @@ export const Logo = styled.Image`
 `;
 
 export const ActivityIndicator = styled.ActivityIndicator.attrs({
-  color: colors.white
+  color: colors.white,
 })``;
 
 export const TextError = styled.Text`

@@ -1,12 +1,12 @@
-import { call, put } from "redux-saga/effects";
+import { call, put } from 'redux-saga/effects';
 
-import { Creators } from "../ducks/type";
+import { Creators } from '../ducks/type';
 
-import api from "~/services/api";
+import api from '~/services/api';
 
 function* index() {
   try {
-    const { data } = yield call(api.get, "/types");
+    const { data } = yield call(api.get, '/types');
 
     yield put(Creators.indexSuccess(data));
   } catch (err) {
