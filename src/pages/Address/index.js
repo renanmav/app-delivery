@@ -3,7 +3,8 @@
 import PropTypes from 'prop-types';
 
 import React, { useState, useEffect } from 'react';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
+import { Types as CartActions } from '~/store/ducks/cart';
 
 import { useDebounce } from 'use-debounce';
 import api from '~/services/cepApi';
@@ -13,7 +14,7 @@ import background from '~/assets/header-background.png';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
 import {
-  StatusBar, ScrollView, Dimensions, View,
+  StatusBar, ScrollView, Dimensions, View, ActivityIndicator,
 } from 'react-native';
 import { TextMask, TextInputMask } from 'react-native-masked-text';
 import {
@@ -39,6 +40,8 @@ export default function Address({ navigation }) {
   const [number, setNumber] = useState('');
   const [district, setDistrict] = useState('');
 
+  const dispatch = useDispatch();
+
   const [cepDebounce] = useDebounce(cep, 1000);
 
   async function fetchCep() {
@@ -60,9 +63,20 @@ export default function Address({ navigation }) {
     fetchCep();
   }, [cepDebounce]);
 
-  const { total_price: totalPrice } = useSelector(state => state.cart);
+  const { total_price: totalPrice, loading } = useSelector(state => state.cart);
 
   const handleGoBack = () => navigation.goBack();
+
+  const handleMakeOrder = () => dispatch({
+    type: CartActions.ORDER_REQUEST,
+    payload: {
+      cep,
+      street,
+      number,
+      district,
+      observation,
+    },
+  });
 
   const disableButtonNext = !(street.length && number.length && district.length);
 
@@ -146,13 +160,20 @@ export default function Address({ navigation }) {
             value={district}
             onChangeText={d => setDistrict(d)}
             ref={fifth => (inputs.fifth = fifth)}
+            onSubmitEditing={handleMakeOrder}
           />
         </Inputs>
 
         <ButtonNextWrapper>
-          <ButtonNext disabled={disableButtonNext}>
-            <TextButtonNext>Finalizar</TextButtonNext>
-            <Icon name="chevron-right" color={colors.white} size={11} />
+          <ButtonNext disabled={disableButtonNext} onPress={handleMakeOrder}>
+            {loading ? (
+              <ActivityIndicator color={colors.white} />
+            ) : (
+              <>
+                <TextButtonNext>Finalizar</TextButtonNext>
+                <Icon name="chevron-right" color={colors.white} size={11} />
+              </>
+            )}
           </ButtonNext>
         </ButtonNextWrapper>
       </ScrollView>

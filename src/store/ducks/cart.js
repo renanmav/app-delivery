@@ -21,10 +21,7 @@ const INITIAL_STATE = {
   items: [],
   sizes_id: [],
   total_price: 0,
-  cep: '',
-  street: '',
-  number: '',
-  district: '',
+  loading: false,
 };
 
 export default function cart(state = INITIAL_STATE, actions) {
@@ -59,6 +56,18 @@ export default function cart(state = INITIAL_STATE, actions) {
         total_price: totalPrice,
       };
     }
+    case Types.ORDER_REQUEST:
+      return { ...state, loading: true };
+    case Types.ORDER_SUCCESS:
+      return {
+        ...state,
+        loading: false,
+        items: [],
+        sizes_id: [],
+        total_price: 0,
+      };
+    case Types.ORDER_FAILURE:
+      return { ...state, loading: false };
     default:
       return { ...state };
   }
@@ -71,10 +80,8 @@ export default function cart(state = INITIAL_STATE, actions) {
 export const Creators = {
   createSuccess: () => ({
     type: Types.ORDER_SUCCESS,
-    payload: {},
   }),
   createFailure: () => ({
     type: Types.ORDER_FAILURE,
-    payload: {},
   }),
 };

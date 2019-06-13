@@ -67,7 +67,7 @@ export default function Login() {
           onSubmitEditing={handleSubmit}
         />
         <Button onPress={handleSubmit}>
-          {loading ? <ActivityIndicator /> : <TextButton>Entrar</TextButton>}
+          {loading ? <ActivityIndicator color={colors.white} /> : <TextButton>Entrar</TextButton>}
         </Button>
         {error ? (
           <TextError>
