@@ -17,6 +17,7 @@ import {
   WrapperTypeTime,
   TextTypeTime,
 } from './styles';
+import { ListWrapper } from '~/styles/general';
 
 function ListTypes({ types, navigation }) {
   const handleTypeClick = (typeId) => {
@@ -26,13 +27,14 @@ function ListTypes({ types, navigation }) {
   };
 
   return (
-    <>
+    <ListWrapper>
       {types.map(type => (
         <Type
           key={type.id}
           onPress={() => handleTypeClick(type.id)}
+          // using for box-shadow on Android
           // eslint-disable-next-line react-native/no-inline-styles
-          style={{ elevation: 15 }} // using for box-shadow on Android
+          style={{ elevation: 15 }}
         >
           <ImageType
             source={{
@@ -49,7 +51,7 @@ function ListTypes({ types, navigation }) {
           </View>
         </Type>
       ))}
-    </>
+    </ListWrapper>
   );
 }
 

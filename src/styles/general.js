@@ -22,3 +22,8 @@ export const Container = styled.SafeAreaView`
 
   padding: ${metrics.basePadding}px;
 `;
+
+export const ListWrapper = styled.ScrollView`
+  margin: 0 ${-metrics.baseMargin * 2}px;
+  flex-wrap: ${({ wrap }) => (wrap ? 'wrap' : 'nowrap')};
+`;
