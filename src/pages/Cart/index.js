@@ -4,7 +4,6 @@ import React from 'react';
 import { useSelector } from 'react-redux';
 
 import { colors } from '~/styles';
-import background from '~/assets/header-background.png';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
 import { StatusBar } from 'react-native';
@@ -22,7 +21,7 @@ export default function Cart(props) {
   const { total_price: totalPrice, items } = useSelector(state => state.cart);
 
   return (
-    <Background source={background}>
+    <Background>
       <Container>
         <StatusBar backgroundColor={colors.background} barStyle="light-content" />
 

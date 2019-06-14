@@ -19,10 +19,6 @@ function Menu({
 }) {
   const { items } = useSelector(state => state.cart);
 
-  const handleCartClick = () => {
-    navigation.navigate('Cart');
-  };
-
   const handleGoBack = () => navigation.goBack();
 
   const renderProperMenu = (menuType) => {
@@ -30,11 +26,11 @@ function Menu({
       case 'home':
         return (
           <>
-            <TouchableOpacity>
+            <TouchableOpacity onPress={() => navigation.navigate('Orders')}>
               <Icon name="history" color={colors.white} size={24} />
             </TouchableOpacity>
             <TextMenu>Pizzaria Don Juan</TextMenu>
-            <ButtonCart onPress={handleCartClick}>
+            <ButtonCart onPress={() => navigation.navigate('Cart')}>
               {items.length ? <HasItems /> : null}
               <Image source={cartImage} />
             </ButtonCart>

@@ -38,7 +38,6 @@ export const TextTypeTime = styled.Text`
 `;
 
 export const Type = styled.TouchableOpacity`
-  margin: 0px ${metrics.baseMargin * 2}px;
   display: flex;
   flex-direction: row;
   align-items: center;

@@ -17,7 +17,6 @@ import {
   WrapperTypeTime,
   TextTypeTime,
 } from './styles';
-import { ListWrapper } from '~/styles/general';
 
 function ListTypes({ types, navigation }) {
   const handleTypeClick = (typeId) => {
@@ -27,7 +26,7 @@ function ListTypes({ types, navigation }) {
   };
 
   return (
-    <ListWrapper>
+    <>
       {types.map(type => (
         <Type
           key={type.id}
@@ -51,7 +50,7 @@ function ListTypes({ types, navigation }) {
           </View>
         </Type>
       ))}
-    </ListWrapper>
+    </>
   );
 }
 
