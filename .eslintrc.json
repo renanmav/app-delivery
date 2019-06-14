@@ -42,7 +42,8 @@
           "TextMenu",
           "TextTypeTime",
           "TextButtonNext",
-          "TextItemSize"
+          "TextItemSize",
+          "TextOrderId"
         ]
       }
     ]

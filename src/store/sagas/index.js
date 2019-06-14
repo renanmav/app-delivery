@@ -15,6 +15,9 @@ import { index as indexSizes } from './size';
 import { Types as CartTypes } from '../ducks/cart';
 import { createOrder } from './cart';
 
+import { Types as OrderTypes } from '../ducks/order';
+import { index as indexOrders } from './order';
+
 export default function* rootSaga() {
   return yield all([
     takeLatest(AuthTypes.LOGIN_REQUEST, login),
@@ -22,5 +25,6 @@ export default function* rootSaga() {
     takeLatest(ProductTypes.INDEX_REQUEST, indexProducts),
     takeLatest(SizeTypes.INDEX_REQUEST, indexSizes),
     takeLatest(CartTypes.ORDER_REQUEST, createOrder),
+    takeLatest(OrderTypes.INDEX_REQUEST, indexOrders),
   ]);
 }

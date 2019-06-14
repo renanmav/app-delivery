@@ -23,7 +23,7 @@ const Routes = createAppContainer(
       defaultNavigationOptions: {
         header: null,
       },
-      initialRouteName: 'Types',
+      initialRouteName: 'Login',
     },
   ),
 );
