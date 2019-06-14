@@ -2,6 +2,7 @@ import PropTypes from 'prop-types';
 
 import React from 'react';
 import api from '~/config/api';
+import { withNavigation } from 'react-navigation';
 
 import { metrics } from '~/styles';
 
@@ -12,7 +13,7 @@ import {
 
 const { width } = Dimensions.get('window');
 
-export default function ListProducts({ products, navigation }) {
+function ListProducts({ products, navigation }) {
   const handleProductClick = (productId) => {
     navigation.navigate('Sizes', {
       product_id: productId,
@@ -50,3 +51,5 @@ ListProducts.propTypes = {
     goBack: PropTypes.func.isRequired,
   }).isRequired,
 };
+
+export default withNavigation(ListProducts);

@@ -1,46 +1,11 @@
 import styled from 'styled-components/native';
 
-import { Dimensions } from 'react-native';
-
 import { colors, metrics } from '~/styles';
-
-const d = Dimensions.get('window');
-
-export const Background = styled.ImageBackground`
-  position: absolute;
-  width: ${d.width}px;
-  height: ${d.height}px;
-  flex: 1;
-`;
-
-export const MenuTop = styled.View`
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  margin: ${metrics.baseMargin * 2}px;
-`;
-
-export const ButtonMenuBack = styled.TouchableOpacity`
-  height: 20px;
-  width: 20px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin-right: ${metrics.baseMargin}px;
-`;
-
-export const TextMenu = styled.Text`
-  font-size: 18px;
-  letter-spacing: 0px;
-  color: ${colors.white};
-  font-weight: bold;
-`;
 
 export const ContainerList = styled.View`
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
-  padding: ${metrics.basePadding}px;
 `;
 
 export const Size = styled.TouchableOpacity`

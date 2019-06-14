@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 /* eslint-disable react-native/no-inline-styles */
 /* eslint-disable no-return-assign */
 import PropTypes from 'prop-types';
@@ -10,20 +11,13 @@ import { useDebounce } from 'use-debounce';
 import api from '~/services/cepApi';
 
 import { colors, metrics } from '~/styles';
-import background from '~/assets/header-background.png';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
 import {
-  StatusBar, ScrollView, Dimensions, View, ActivityIndicator,
+  StatusBar, Dimensions, View, ActivityIndicator,
 } from 'react-native';
 import { TextMask, TextInputMask } from 'react-native-masked-text';
 import {
-  Background,
-  MenuTop,
-  ButtonMenuBack,
-  TextMenu,
-  MenuTopWrapper,
-  Inputs,
   Input,
   ButtonNextWrapper,
   ButtonNext,
@@ -31,9 +25,12 @@ import {
   styles,
 } from './styles';
 
+import { Background, Container } from '~/styles/general';
+import Menu from '~/components/Menu';
+
 const { width: w } = Dimensions.get('window');
 
-export default function Address({ navigation }) {
+export default function Address() {
   const [observation, setObservation] = useState('');
   const [cep, setCep] = useState('');
   const [street, setStreet] = useState('');
@@ -64,9 +61,6 @@ export default function Address({ navigation }) {
   }, [cepDebounce]);
 
   const { total_price: totalPrice, loading } = useSelector(state => state.cart);
-
-  const handleGoBack = () => navigation.goBack();
-
   const handleMakeOrder = () => dispatch({
     type: CartActions.ORDER_REQUEST,
     payload: {
@@ -89,31 +83,24 @@ export default function Address({ navigation }) {
   };
 
   return (
-    <Background source={background}>
-      <StatusBar backgroundColor={colors.background} barStyle="light-content" />
-      <ScrollView>
-        <MenuTop>
-          <MenuTopWrapper>
-            <ButtonMenuBack onPress={handleGoBack}>
-              <Icon name="chevron-left" color={colors.light} size={11} />
-            </ButtonMenuBack>
-            <TextMenu>Realizar pedido</TextMenu>
-          </MenuTopWrapper>
-          <TextMenu>
-            <TextMask
-              value={totalPrice}
-              type="money"
-              options={{
-                precision: 2,
-                separator: ',',
-                delimiter: '.',
-                unit: 'R$',
-                suffixUnit: '',
-              }}
-            />
-          </TextMenu>
-        </MenuTop>
-        <Inputs>
+    <Background>
+      <Container>
+        <StatusBar backgroundColor={colors.background} barStyle="light-content" />
+        <Menu type="money" title="Realizar pedido">
+          <TextMask
+            value={totalPrice}
+            type="money"
+            options={{
+              precision: 2,
+              separator: ',',
+              delimiter: '.',
+              unit: 'R$',
+              suffixUnit: '',
+            }}
+          />
+        </Menu>
+
+        <>
           <Input
             placeholder="Alguma observação?"
             value={observation}
@@ -162,7 +149,7 @@ export default function Address({ navigation }) {
             ref={fifth => (inputs.fifth = fifth)}
             onSubmitEditing={handleMakeOrder}
           />
-        </Inputs>
+        </>
 
         <ButtonNextWrapper>
           <ButtonNext disabled={disableButtonNext} onPress={handleMakeOrder}>
@@ -176,7 +163,7 @@ export default function Address({ navigation }) {
             )}
           </ButtonNext>
         </ButtonNextWrapper>
-      </ScrollView>
+      </Container>
     </Background>
   );
 }

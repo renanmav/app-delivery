@@ -1,59 +1,6 @@
 import styled from 'styled-components/native';
 
-import { Dimensions } from 'react-native';
-
 import { colors, metrics } from '~/styles';
-
-const d = Dimensions.get('window');
-
-export const Background = styled.ImageBackground`
-  position: absolute;
-  width: ${d.width}px;
-  height: ${d.height}px;
-  flex: 1;
-`;
-
-export const Container = styled.SafeAreaView`
-  display: flex;
-  flex: 1;
-  flex-direction: column;
-  height: 100%;
-`;
-
-export const MenuTop = styled.View`
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: space-between;
-  margin: ${metrics.baseMargin * 2}px;
-`;
-
-export const TextMenu = styled.Text`
-  font-size: 18px;
-  color: ${colors.white};
-  letter-spacing: 0;
-  font-weight: bold;
-`;
-
-export const ButtonCart = styled.TouchableOpacity`
-  background: ${colors.primary};
-
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  width: 38px;
-  height: 38px;
-
-  border-radius: 50px;
-
-  position: relative;
-`;
-
-export const ListType = styled.View`
-  margin: ${metrics.baseMargin * 2}px;
-  margin-top: ${metrics.baseMargin}px;
-`;
 
 export const ImageType = styled.Image`
   height: 79px;
@@ -94,24 +41,10 @@ export const Type = styled.TouchableOpacity`
   display: flex;
   flex-direction: row;
   align-items: center;
-
   background: ${colors.white};
   border-radius: ${metrics.baseRadius}px;
   padding: ${metrics.basePadding}px;
-
   height: 110px;
-
   margin-bottom: ${metrics.baseMargin}px;
-
   box-shadow: 5px 5px 5px ${colors.darkTransparent};
-`;
-
-export const HasItems = styled.View`
-  height: 12px;
-  width: 12px;
-  border-radius: 6px;
-  background: ${colors.secondary};
-  position: absolute;
-  top: 0;
-  right: 0;
 `;

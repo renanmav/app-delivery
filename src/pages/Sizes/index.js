@@ -5,15 +5,12 @@ import { useSelector, useDispatch } from 'react-redux';
 import { Types as SizeActions } from '~/store/ducks/size';
 
 import { colors } from '~/styles';
-import background from '~/assets/header-background.png';
-import Icon from 'react-native-vector-icons/FontAwesome';
 
-import { ScrollView, StatusBar, ActivityIndicator } from 'react-native';
-import {
-  Background, MenuTop, ButtonMenuBack, TextMenu,
-} from './styles';
+import { StatusBar, ActivityIndicator } from 'react-native';
+import { Background, Container } from '~/styles/general';
 
 import ListSizes from './list';
+import Menu from '~/components/Menu';
 
 export default function Sizes(props) {
   const { loading, sizes } = useSelector(state => state.size);
@@ -30,26 +27,20 @@ export default function Sizes(props) {
     });
   }, []);
 
-  const handleGoBack = () => props.navigation.goBack();
-
   return (
-    <Background source={background}>
-      <StatusBar backgroundColor={colors.background} barStyle="light-content" />
-      <ScrollView>
-        <MenuTop>
-          <ButtonMenuBack onPress={handleGoBack}>
-            <Icon name="chevron-left" color={colors.light} size={11} />
-          </ButtonMenuBack>
-          <TextMenu>Selecione um tamanho</TextMenu>
-        </MenuTop>
+    <Background>
+      <Container>
+        <StatusBar backgroundColor={colors.background} barStyle="light-content" />
+        <Menu simple title="Selecione um tamanho" />
+
         {loading ? <ActivityIndicator color={colors.white} /> : <ListSizes sizes={sizes} />}
-      </ScrollView>
+      </Container>
     </Background>
   );
 }
 
 Sizes.propTypes = {
   navigation: PropTypes.shape({
-    goBack: PropTypes.func.isRequired,
+    getParam: PropTypes.func.isRequired,
   }).isRequired,
 };

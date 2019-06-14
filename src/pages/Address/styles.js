@@ -1,52 +1,8 @@
 import styled from 'styled-components/native';
 
-import { Dimensions, StyleSheet } from 'react-native';
+import { StyleSheet } from 'react-native';
 
 import { colors, metrics } from '~/styles';
-
-const d = Dimensions.get('window');
-
-export const Background = styled.ImageBackground`
-  position: absolute;
-  width: ${d.width}px;
-  height: ${d.height}px;
-  flex: 1;
-`;
-
-export const MenuTop = styled.View`
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: space-between;
-  margin: ${metrics.baseMargin * 2}px;
-`;
-
-export const ButtonMenuBack = styled.TouchableOpacity`
-  height: 20px;
-  width: 20px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin-right: ${metrics.baseMargin}px;
-`;
-
-export const TextMenu = styled.Text`
-  font-size: 18px;
-  letter-spacing: 0px;
-  color: ${colors.white};
-  font-weight: bold;
-`;
-
-export const MenuTopWrapper = styled.View`
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-`;
-
-export const Inputs = styled.View`
-  margin: ${metrics.baseMargin * 2}px;
-  margin-top: 20px;
-`;
 
 export const Input = styled.TextInput.attrs({
   placeholderTextColor: colors.regular,
@@ -65,24 +21,9 @@ export const Input = styled.TextInput.attrs({
   box-shadow: 5px 5px 5px ${colors.darkTransparent};
 `;
 
-export const styles = StyleSheet.create({
-  cep: {
-    backgroundColor: colors.white,
-    borderRadius: metrics.baseRadius,
-    color: colors.darker,
-    elevation: 15,
-    fontSize: 15,
-    height: 50,
-    marginBottom: metrics.baseMargin,
-    paddingHorizontal: metrics.basePadding,
-    shadowColor: colors.darkTransparent,
-    shadowOffset: { width: 0, height: 0 },
-    shadowRadius: 5,
-  },
-});
-
 export const ButtonNextWrapper = styled.View`
-  padding: 0px ${metrics.basePadding}px;
+  margin-top: ${metrics.baseMargin}px;
+
   display: flex;
   align-items: flex-end;
 `;
@@ -106,3 +47,19 @@ export const TextButtonNext = styled.Text`
   text-transform: uppercase;
   margin-right: ${metrics.baseMargin}px;
 `;
+
+export const styles = StyleSheet.create({
+  cep: {
+    backgroundColor: colors.white,
+    borderRadius: metrics.baseRadius,
+    color: colors.darker,
+    elevation: 15,
+    fontSize: 15,
+    height: 50,
+    marginBottom: metrics.baseMargin,
+    paddingHorizontal: metrics.basePadding,
+    shadowColor: colors.darkTransparent,
+    shadowOffset: { width: 0, height: 0 },
+    shadowRadius: 5,
+  },
+});

@@ -3,6 +3,8 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import api from '~/config/api';
 
+import { withNavigation } from 'react-navigation';
+
 import { colors } from '~/styles';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 
@@ -10,14 +12,13 @@ import { View } from 'react-native';
 import {
   Type,
   ImageType,
-  ListType,
   TextTypeName,
   TextTypeDescription,
   WrapperTypeTime,
   TextTypeTime,
 } from './styles';
 
-export default function ListTypes({ types, navigation }) {
+function ListTypes({ types, navigation }) {
   const handleTypeClick = (typeId) => {
     navigation.navigate('Products', {
       type_id: typeId,
@@ -25,7 +26,7 @@ export default function ListTypes({ types, navigation }) {
   };
 
   return (
-    <ListType>
+    <>
       {types.map(type => (
         <Type
           key={type.id}
@@ -48,7 +49,7 @@ export default function ListTypes({ types, navigation }) {
           </View>
         </Type>
       ))}
-    </ListType>
+    </>
   );
 }
 
@@ -68,3 +69,5 @@ ListTypes.propTypes = {
     navigate: PropTypes.func.isRequired,
   }).isRequired,
 };
+
+export default withNavigation(ListTypes);

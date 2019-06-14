@@ -1,29 +1,17 @@
-import PropTypes from 'prop-types';
-
 import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Types as TypeActions } from '~/store/ducks/type';
 
-import cartImage from '~/assets/cart.png';
-import background from '~/assets/header-background.png';
 import { colors } from '~/styles';
 
-import Icon from 'react-native-vector-icons/MaterialIcons';
-
-import {
-  Image, TouchableOpacity, StatusBar, ActivityIndicator,
-} from 'react-native';
-import {
-  Container, MenuTop, TextMenu, ButtonCart, Background, HasItems,
-} from './styles';
+import { StatusBar, ActivityIndicator } from 'react-native';
+import { Container, Background } from '~/styles/general';
 
 import ListTypes from './list';
+import Menu from '~/components/Menu';
 
-export default function Types(props) {
-  const { navigation } = props;
-
+export default function Types() {
   const { loading, types } = useSelector(state => state.type);
-  const { items } = useSelector(state => state.cart);
 
   const dispatch = useDispatch();
 
@@ -33,36 +21,14 @@ export default function Types(props) {
     });
   }, []);
 
-  const handleCartClick = () => {
-    navigation.navigate('Cart');
-  };
-
   return (
-    <Background source={background}>
+    <Background>
       <Container>
         <StatusBar backgroundColor={colors.background} barStyle="light-content" />
-        <MenuTop>
-          <TouchableOpacity>
-            <Icon name="history" color={colors.white} size={24} />
-          </TouchableOpacity>
-          <TextMenu>Pizzaria Don Juan</TextMenu>
-          <ButtonCart onPress={handleCartClick}>
-            {items.length ? <HasItems /> : null}
-            <Image source={cartImage} />
-          </ButtonCart>
-        </MenuTop>
-        {loading ? (
-          <ActivityIndicator color={colors.white} />
-        ) : (
-          <ListTypes types={types} navigation={navigation} />
-        )}
+        <Menu type="home" />
+
+        {loading ? <ActivityIndicator color={colors.white} /> : <ListTypes types={types} />}
       </Container>
     </Background>
   );
 }
-
-Types.propTypes = {
-  navigation: PropTypes.shape({
-    navigate: PropTypes.func.isRequired,
-  }).isRequired,
-};

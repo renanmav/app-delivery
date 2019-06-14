@@ -13,7 +13,7 @@ import Icon from 'react-native-vector-icons/MaterialIcons';
 import { View, TouchableOpacity } from 'react-native';
 import { TextMask } from 'react-native-masked-text';
 import {
-  ListItem, Item, ImageItem, TextItemName, TextItemSize, TextItemPrice,
+  Item, ImageItem, TextItemName, TextItemSize, TextItemPrice,
 } from './styles';
 
 export default function ListItems({ items }) {
@@ -27,7 +27,7 @@ export default function ListItems({ items }) {
   };
 
   return (
-    <ListItem>
+    <>
       {items.map((item, index) => (
         <Item key={index} style={{ elevation: 15 }}>
           <ImageItem
@@ -57,7 +57,7 @@ export default function ListItems({ items }) {
           </TouchableOpacity>
         </Item>
       ))}
-    </ListItem>
+    </>
   );
 }
 

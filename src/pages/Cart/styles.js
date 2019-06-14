@@ -1,52 +1,6 @@
 import styled from 'styled-components/native';
 
-import { Dimensions } from 'react-native';
-
 import { colors, metrics } from '~/styles';
-
-const d = Dimensions.get('window');
-
-export const Background = styled.ImageBackground`
-  position: absolute;
-  width: ${d.width}px;
-  height: ${d.height}px;
-  flex: 1;
-`;
-
-export const MenuTop = styled.View`
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: space-between;
-  margin: ${metrics.baseMargin * 2}px;
-`;
-
-export const ButtonMenuBack = styled.TouchableOpacity`
-  height: 20px;
-  width: 20px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin-right: ${metrics.baseMargin}px;
-`;
-
-export const TextMenu = styled.Text`
-  font-size: 18px;
-  letter-spacing: 0px;
-  color: ${colors.white};
-  font-weight: bold;
-`;
-
-export const MenuTopWrapper = styled.View`
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-`;
-
-export const ListItem = styled.View`
-  margin: ${metrics.baseMargin * 2}px;
-  margin-top: 20px;
-`;
 
 export const ImageItem = styled.Image`
   height: 79px;
@@ -107,7 +61,7 @@ export const Item = styled.View`
 `;
 
 export const ButtonNextWrapper = styled.View`
-  padding: 0px ${metrics.basePadding}px;
+  margin-top: ${metrics.baseMargin}px;
   display: flex;
   align-items: flex-end;
 `;
