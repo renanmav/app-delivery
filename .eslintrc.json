@@ -43,7 +43,8 @@
           "TextTypeTime",
           "TextButtonNext",
           "TextItemSize",
-          "TextOrderId"
+          "TextOrderId",
+          "TextOrderTime"
         ]
       }
     ]

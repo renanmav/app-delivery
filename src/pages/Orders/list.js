@@ -16,7 +16,7 @@ export default function ListOrders({ orders }) {
         <Order key={order.id} style={{ elevation: 15 }}>
           <View>
             <TextOrderId>{`Pedido #${order.id}`}</TextOrderId>
-            <TextOrderTime>{order.created_at}</TextOrderTime>
+            <TextOrderTime>{`Há ${order.from_now}`}</TextOrderTime>
             <TextOrderPrice>
               <TextMask
                 value={order.total_price}
