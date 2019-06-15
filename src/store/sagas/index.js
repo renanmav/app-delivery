@@ -1,7 +1,7 @@
 import { all, takeLatest } from 'redux-saga/effects';
 
 import { Types as AuthTypes } from '../ducks/auth';
-import { login } from './auth';
+import { login, createUser } from './auth';
 
 import { Types as TypeTypes } from '../ducks/type';
 import { index as indexTypes } from './type';
@@ -21,6 +21,7 @@ import { index as indexOrders } from './order';
 export default function* rootSaga() {
   return yield all([
     takeLatest(AuthTypes.LOGIN_REQUEST, login),
+    takeLatest(AuthTypes.SIGNUP_REQUEST, createUser),
     takeLatest(TypeTypes.INDEX_REQUEST, indexTypes),
     takeLatest(ProductTypes.INDEX_REQUEST, indexProducts),
     takeLatest(SizeTypes.INDEX_REQUEST, indexSizes),

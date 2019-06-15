@@ -21,23 +21,24 @@ import {
   TextError,
 } from './styles';
 
-export default function Login({ navigation }) {
-  const [credentials, setCredentials] = useState({ email: '', password: '' });
+export default function Signup({ navigation }) {
+  const [credentials, setCredentials] = useState({ name: '', email: '', password: '' });
 
-  const { loading, error } = useSelector(state => state.auth);
+  const { loading, error, errorMessage } = useSelector(state => state.auth);
 
   const dispatch = useDispatch();
 
   const handleSubmit = () => {
-    const { email, password } = credentials;
+    const { name, email, password } = credentials;
 
     dispatch({
-      type: AuthActions.LOGIN_REQUEST,
-      payload: { email, password },
+      type: AuthActions.SIGNUP_REQUEST,
+      payload: { name, email, password },
     });
   };
 
   let secondTextInput = null;
+  let thirdTextInput = null;
 
   return (
     <Background source={background}>
@@ -45,14 +46,28 @@ export default function Login({ navigation }) {
         <StatusBar color={colors.primary} />
         <Logo source={logo} />
         <Input
+          value={credentials.name}
+          onChangeText={name => setCredentials({ ...credentials, name })}
+          autoCorrect={false}
+          placeholder="Nome completo"
+          returnKeyType="next"
+          onSubmitEditing={() => {
+            secondTextInput.focus();
+          }}
+          blurOnSubmit={false}
+        />
+        <Input
           value={credentials.email}
           onChangeText={email => setCredentials({ ...credentials, email })}
           autoCapitalize="none"
           autoCorrect={false}
           placeholder="Seu e-mail"
           returnKeyType="next"
+          ref={(input) => {
+            secondTextInput = input;
+          }}
           onSubmitEditing={() => {
-            secondTextInput.focus();
+            thirdTextInput.focus();
           }}
           blurOnSubmit={false}
         />
@@ -64,27 +79,27 @@ export default function Login({ navigation }) {
           placeholder="Sua senha secreta"
           secureTextEntry
           ref={(input) => {
-            secondTextInput = input;
+            thirdTextInput = input;
           }}
           onSubmitEditing={handleSubmit}
         />
         <Button onPress={handleSubmit}>
-          {loading ? <ActivityIndicator color={colors.white} /> : <TextButton>Entrar</TextButton>}
+          {loading ? (
+            <ActivityIndicator color={colors.white} />
+          ) : (
+            <TextButton>Criar conta</TextButton>
+          )}
         </Button>
-        {error ? (
-          <TextError>
-            Algo deu errado! Verifique suas credenciais ou tente novamente mais tarde.
-          </TextError>
-        ) : null}
-        <CreateAccount onPress={() => navigation.navigate('Signup')}>
-          <TextButton>Criar conta gratuita</TextButton>
+        {error ? <TextError>{errorMessage}</TextError> : null}
+        <CreateAccount onPress={() => navigation.navigate('Login')}>
+          <TextButton>Já tenho login</TextButton>
         </CreateAccount>
       </Container>
     </Background>
   );
 }
 
-Login.propTypes = {
+Signup.propTypes = {
   navigation: PropTypes.shape({
     navigate: PropTypes.func.isRequired,
   }).isRequired,

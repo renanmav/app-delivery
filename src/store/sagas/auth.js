@@ -26,4 +26,24 @@ function* login(action) {
   }
 }
 
-export { login };
+function* createUser(action) {
+  try {
+    const { name, email, password } = action.payload;
+    yield call(api.post, '/users', {
+      name,
+      email,
+      password,
+      password_confirmation: password,
+    });
+
+    yield put(Creators.signupSuccess());
+
+    navigateAndResetHistory('Login');
+  } catch (err) {
+    yield put(
+      Creators.signupFailure('Algo deu errado. Verifique se o seu email já não foi cadastrado.'),
+    );
+  }
+}
+
+export { login, createUser };

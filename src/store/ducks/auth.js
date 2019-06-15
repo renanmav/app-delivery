@@ -6,6 +6,9 @@ export const Types = {
   LOGIN_REQUEST: 'auth/LOGIN_REQUEST',
   LOGIN_SUCCESS: 'auth/LOGIN_SUCCESS',
   LOGIN_FAILURE: 'auth/LOGIN_FAILURE',
+  SIGNUP_REQUEST: 'auth/SIGNUP_REQUEST',
+  SIGNUP_SUCCESS: 'auth/SIGNUP_SUCCESS',
+  SIGNUP_FAILURE: 'auth/SIGNUP_FAILURE',
 };
 
 /**
@@ -17,6 +20,7 @@ const INITIAL_STATE = {
   token: '',
   error: false,
   user: {},
+  errorMessage: '',
 };
 
 export default function auth(state = INITIAL_STATE, actions) {
@@ -32,6 +36,21 @@ export default function auth(state = INITIAL_STATE, actions) {
       };
     case Types.LOGIN_FAILURE:
       return { ...state, loading: false, error: true };
+    case Types.SIGNUP_REQUEST:
+      return { ...state, loading: true, error: false };
+    case Types.SIGNUP_SUCCESS:
+      return {
+        ...state,
+        loading: false,
+        error: false,
+      };
+    case Types.SIGNUP_FAILURE:
+      return {
+        ...state,
+        loading: false,
+        error: true,
+        errorMessage: actions.payload.message,
+      };
     default:
       return { ...state };
   }
@@ -48,6 +67,12 @@ export const Creators = {
   }),
   loginFailure: () => ({
     type: Types.LOGIN_FAILURE,
-    payload: {},
+  }),
+  signupSuccess: () => ({
+    type: Types.SIGNUP_SUCCESS,
+  }),
+  signupFailure: message => ({
+    type: Types.SIGNUP_FAILURE,
+    payload: { message },
   }),
 };

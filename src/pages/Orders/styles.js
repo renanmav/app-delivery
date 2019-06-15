@@ -24,7 +24,7 @@ export const TextOrderPrice = styled.Text`
   font-weight: bold;
 `;
 
-export const Order = styled.TouchableOpacity`
+export const Order = styled.View`
   display: flex;
   flex-direction: row;
   align-items: center;
