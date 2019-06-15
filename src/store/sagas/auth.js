@@ -5,6 +5,7 @@ import { Creators } from '../ducks/auth';
 import api from '~/services/api';
 import { navigateAndResetHistory } from '~/services/navigation';
 
+// eslint-disable-next-line consistent-return
 function* login(action) {
   try {
     const { email, password } = action.payload;
@@ -18,9 +19,12 @@ function* login(action) {
       },
     });
 
+    // admins can't login to app
+    if (user.is_admin) return yield put(Creators.loginFailure());
+
     yield put(Creators.loginSuccess(token, user));
 
-    navigateAndResetHistory('Types');
+    return navigateAndResetHistory('Types');
   } catch (err) {
     yield put(Creators.loginFailure());
   }
