@@ -108,7 +108,6 @@ export default function Address() {
             onChangeText={obs => setObservation(obs)}
             multiline
             ref={first => (inputs.first = first)}
-            onSubmitEditing={() => inputs.second.focus()}
             blurOnSubmit={false}
           />
           <TextInputMask
